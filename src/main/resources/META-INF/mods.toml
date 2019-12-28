@@ -27,3 +27,9 @@ Adds new tools
     versionRange="[1.15.1,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.wtbw_tools]]
+    modId="wtbw_lib"
+    mandatory=true
+    versionRange="[1.0.0,)"
+    ordering="NONE"
+    side="BOTH"
