@@ -30,6 +30,7 @@
   "wtbw.tooltip.trowel": "Places random blocks from your hotbar",
   "wtbw.tooltip.water": "Water: %s/%s",
   "wtbw.tooltip.radius": "Radius: %s",
+  "wtbw.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
   "wtbw.text.swap_target_changed": "Changed block to ",
   "wtbw.text.cycled": "Changed radius to %s"

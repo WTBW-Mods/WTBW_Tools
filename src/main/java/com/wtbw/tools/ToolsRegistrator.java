@@ -4,6 +4,7 @@ import com.wtbw.lib.Registrator;
 import com.wtbw.lib.block.BaseTileBlock;
 import com.wtbw.lib.item.BaseBlockItem;
 import com.wtbw.lib.util.TextComponentBuilder;
+import com.wtbw.tools.blocks.GreenHouseGlassBlock;
 import com.wtbw.tools.blocks.ModBlocks;
 import com.wtbw.tools.config.CommonConfig;
 import com.wtbw.tools.item.tools.*;
@@ -27,6 +28,7 @@ public class ToolsRegistrator extends Registrator
   protected void registerAllBlocks()
   {
     register(new BaseTileBlock<>(getBlockProperties(Material.IRON, 4), (world, state) -> new MagnetInhibitorTileEntity()), "magnet_inhibitor", false);
+    register(new GreenHouseGlassBlock(getBlockProperties(Material.GLASS, 1).func_226896_b_()), "greenhouse_glass");
   }
   
   @Override

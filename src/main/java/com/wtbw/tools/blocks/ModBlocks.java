@@ -12,4 +12,5 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModBlocks
 {
   public static final BaseTileBlock<MagnetInhibitorTileEntity> MAGNET_INHIBITOR = null;
+  public static final GreenHouseGlassBlock GREENHOUSE_GLASS = null;
 }
