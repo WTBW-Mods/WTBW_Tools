@@ -5,6 +5,7 @@ import com.wtbw.lib.WTBWLib;
 import com.wtbw.lib.util.RandomUtil;
 import com.wtbw.lib.util.TextComponentBuilder;
 import com.wtbw.lib.util.Utilities;
+import com.wtbw.tools.WTBWTools;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
@@ -154,7 +155,7 @@ public class Trowel extends Item
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
   {
-    String baseKey = WTBWLib.MODID + ".tooltip.trowel";
+    String baseKey = WTBWTools.MODID + ".tooltip.trowel";
     tooltip.add(TextComponentBuilder.createTranslated(baseKey).aqua().build());
   
     super.addInformation(stack, worldIn, tooltip, flagIn);
