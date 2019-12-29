@@ -1,4 +1,6 @@
 {
+  "itemGroup.wtbw_tools": "WTBW - Tools",
+
   "item.wtbw_tools.stone_hammer": "Stone Hammer",
   "item.wtbw_tools.iron_hammer": "Iron Hammer",
   "item.wtbw_tools.gold_hammer": "Gold Hammer",
@@ -18,6 +20,11 @@
   "item.wtbw_tools.iron_swap_tool": "Iron Swapper",
   "item.wtbw_tools.diamond_swap_tool": "Diamond Swapper",
 
+  "item.wtbw_tools.watering_can": "Basic Watering Can",
+  "item.wtbw_tools.watering_can_quartz": "Quartz Watering Can",
+  "item.wtbw_tools.watering_can_diamond": "Diamond Watering Can",
+  "item.wtbw_tools.watering_can_ender": "Ender Watering Can",
+
   "item.wtbw_tools.trowel": "Trowel",
   "item.wtbw_tools.magnet": "Magnet",
 
@@ -33,5 +40,7 @@
   "wtbw_tools.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
   "wtbw_tools.text.swap_target_changed": "Changed block to ",
-  "wtbw_tools.text.cycled": "Changed radius to %s"
+  "wtbw_tools.text.cycled": "Changed radius to %s",
+
+  "block.wtbw_tools.greenhouse_glass": "Greenhouse Glass"
 }
