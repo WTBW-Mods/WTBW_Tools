@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  Q",
+    "QwQ",
+    " Q "
+  ],
+  "key": {
+    "Q": {
+      "tag": "forge:gems/quartz"
+    },
+    "w": {
+      "item": "wtbw_tools:watering_can"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:watering_can_quartz"
+  }
+}
