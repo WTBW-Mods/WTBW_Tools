@@ -2,7 +2,7 @@ package com.wtbw.tools.item.tools;
 
 import com.wtbw.tools.WTBWTools;
 import com.wtbw.tools.config.CommonConfig;
-import com.wtbw.lib.util.NBTHelper;
+import com.wtbw.lib.util.nbt.NBTHelper;
 import com.wtbw.lib.util.RandomUtil;
 import com.wtbw.lib.util.Utilities;
 import net.minecraft.block.*;
