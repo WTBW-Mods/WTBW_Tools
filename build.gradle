@@ -62,6 +62,11 @@ minecraft {
     }
 }
 
+repositories {
+    mavenLocal()
+    maven { url "https://maven.latmod.com/" }
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     if (findProject(':Mod_WTBW_Lib') != null) {
@@ -71,7 +76,19 @@ dependencies {
         compile project(":wtbw_lib")
     }
     else {
-        compile fg.deobf (project.dependencies.create("com.github.wtbw-mods:wtbw_lib:${wtbwlib_version}") {
+        compile fg.deobf (project.dependencies.create("com.wtbw.mods:wtbw_lib-1.15.1:${wtbwlib_version}") {
+            transitive = false
+        })
+    }
+
+    if (findProject(':Mod_WTBW_Core') != null) {
+        compile project(':Mod_WTBW_Core')
+    }
+    else if (findProject(':wtbw_core') != null){
+        compile project(":wtbw_core")
+    }
+    else {
+        compile fg.deobf (project.dependencies.create("com.wtbw.mods:wtbw_core-1.15.1:${wtbwcore_version}") {
             transitive = false
         })
     }
