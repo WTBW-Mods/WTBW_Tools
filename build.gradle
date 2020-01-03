@@ -13,7 +13,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = "${project_version}"
-group = 'com.wtbw.tools'
+group = 'com.wtbw.mods'
 archivesBaseName = "wtbw_tools-${minecraft_version}"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'

@@ -1,14 +1,14 @@
-package com.wtbw.tools;
+package com.wtbw.mods.tools;
 
-import com.wtbw.lib.Registrator;
-import com.wtbw.lib.block.BaseTileBlock;
-import com.wtbw.lib.item.BaseBlockItem;
-import com.wtbw.lib.util.TextComponentBuilder;
-import com.wtbw.tools.blocks.GreenHouseGlassBlock;
-import com.wtbw.tools.blocks.ModBlocks;
-import com.wtbw.tools.config.CommonConfig;
-import com.wtbw.tools.item.tools.*;
-import com.wtbw.tools.tile.MagnetInhibitorTileEntity;
+import com.wtbw.mods.lib.Registrator;
+import com.wtbw.mods.lib.block.BaseTileBlock;
+import com.wtbw.mods.lib.item.BaseBlockItem;
+import com.wtbw.mods.lib.util.TextComponentBuilder;
+import com.wtbw.mods.tools.blocks.GreenHouseGlassBlock;
+import com.wtbw.mods.tools.blocks.ModBlocks;
+import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.item.tools.*;
+import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemTier;

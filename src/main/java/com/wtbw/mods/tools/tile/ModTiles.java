@@ -1,6 +1,6 @@
-package com.wtbw.tools.tile;
+package com.wtbw.mods.tools.tile;
 
-import com.wtbw.tools.WTBWTools;
+import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.ObjectHolder;
 

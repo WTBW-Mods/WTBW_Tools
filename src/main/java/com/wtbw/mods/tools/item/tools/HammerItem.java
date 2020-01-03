@@ -1,6 +1,6 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
-import com.wtbw.lib.util.Utilities;
+import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

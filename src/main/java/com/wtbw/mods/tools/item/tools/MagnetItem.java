@@ -1,10 +1,10 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
-import com.wtbw.tools.config.CommonConfig;
-import com.wtbw.tools.tile.MagnetInhibitorTileEntity;
-import com.wtbw.lib.util.nbt.NBTHelper;
-import com.wtbw.lib.util.StackUtil;
-import com.wtbw.lib.util.Utilities;
+import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
+import com.wtbw.mods.lib.util.nbt.NBTHelper;
+import com.wtbw.mods.lib.util.StackUtil;
+import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

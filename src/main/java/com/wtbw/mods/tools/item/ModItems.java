@@ -1,6 +1,6 @@
-package com.wtbw.tools.item;
+package com.wtbw.mods.tools.item;
 
-import com.wtbw.tools.WTBWTools;
+import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraftforge.registries.ObjectHolder;

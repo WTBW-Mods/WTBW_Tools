@@ -1,11 +1,10 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
 
-import com.wtbw.lib.WTBWLib;
-import com.wtbw.lib.util.RandomUtil;
-import com.wtbw.lib.util.TextComponentBuilder;
-import com.wtbw.lib.util.Utilities;
-import com.wtbw.tools.WTBWTools;
+import com.wtbw.mods.lib.util.RandomUtil;
+import com.wtbw.mods.lib.util.TextComponentBuilder;
+import com.wtbw.mods.lib.util.Utilities;
+import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;

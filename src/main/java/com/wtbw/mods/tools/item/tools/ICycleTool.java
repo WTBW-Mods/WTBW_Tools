@@ -1,4 +1,4 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;

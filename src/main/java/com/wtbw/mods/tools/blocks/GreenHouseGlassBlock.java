@@ -1,20 +1,17 @@
-package com.wtbw.tools.blocks;
+package com.wtbw.mods.tools.blocks;
 
-import com.wtbw.lib.util.PlayEvent;
-import com.wtbw.lib.util.RandomUtil;
-import com.wtbw.lib.util.TextComponentBuilder;
-import com.wtbw.tools.WTBWTools;
+import com.wtbw.mods.lib.util.PlayEvent;
+import com.wtbw.mods.lib.util.RandomUtil;
+import com.wtbw.mods.lib.util.TextComponentBuilder;
+import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.block.*;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;

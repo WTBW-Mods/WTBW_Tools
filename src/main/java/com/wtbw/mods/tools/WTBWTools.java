@@ -1,8 +1,8 @@
-package com.wtbw.tools;
+package com.wtbw.mods.tools;
 
-import com.wtbw.lib.keybinds.LibKeyBinds;
-import com.wtbw.tools.config.CommonConfig;
-import com.wtbw.tools.item.ModItems;
+import com.wtbw.mods.lib.keybinds.LibKeyBinds;
+import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.item.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;

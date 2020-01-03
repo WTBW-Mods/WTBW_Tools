@@ -1,6 +1,6 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
-import com.wtbw.lib.util.Utilities;
+import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,24 +8,25 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.Tags;
 
 import java.util.List;
 
 /*
   @author: Naxanria
 */
-public class GreatAxeItem extends AxeItem
+public class ExcavatorItem extends ShovelItem
 {
-  public GreatAxeItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder)
+  public ExcavatorItem(IItemTier tier, int attackDamageIn, float attackSpeedIn, Properties builder)
   {
     super(tier, attackDamageIn, attackSpeedIn, builder);
   }
@@ -54,6 +55,8 @@ public class GreatAxeItem extends AxeItem
           stack.damageItem(1, player, playerEntity -> playerEntity.sendBreakAnimation(EquipmentSlotType.MAINHAND));
         }
       }
+      
+      
     }
     
     return true;
@@ -66,10 +69,8 @@ public class GreatAxeItem extends AxeItem
     {
       return false;
     }
-    
-    return state.isIn(BlockTags.PLANKS) || state.isIn(BlockTags.LOGS) || state.isIn(BlockTags.LEAVES);
-    
-//    return super.canHarvestBlock(state);
+    /*|| state.isIn(BlockTags.field_219750_S DIRT_LIKE)*/
+    return state.isIn(BlockTags.SAND) || state.isIn(Tags.Blocks.DIRT) || state.isIn(Tags.Blocks.GRAVEL) || state.getBlock() == Blocks.SOUL_SAND;
   }
   
   private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)

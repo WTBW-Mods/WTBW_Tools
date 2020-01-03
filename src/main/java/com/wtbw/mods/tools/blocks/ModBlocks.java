@@ -1,8 +1,8 @@
-package com.wtbw.tools.blocks;
+package com.wtbw.mods.tools.blocks;
 
-import com.wtbw.lib.block.BaseTileBlock;
-import com.wtbw.tools.WTBWTools;
-import com.wtbw.tools.tile.MagnetInhibitorTileEntity;
+import com.wtbw.mods.lib.block.BaseTileBlock;
+import com.wtbw.mods.tools.WTBWTools;
+import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
 import net.minecraftforge.registries.ObjectHolder;
 
 /*

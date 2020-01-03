@@ -1,11 +1,11 @@
-package com.wtbw.tools.item.tools;
+package com.wtbw.mods.tools.item.tools;
 
 
-import com.wtbw.lib.util.StackUtil;
-import com.wtbw.lib.util.TextComponentBuilder;
-import com.wtbw.lib.util.Utilities;
-import com.wtbw.tools.WTBWTools;
-import com.wtbw.tools.config.CommonConfig;
+import com.wtbw.mods.lib.util.StackUtil;
+import com.wtbw.mods.lib.util.TextComponentBuilder;
+import com.wtbw.mods.lib.util.Utilities;
+import com.wtbw.mods.tools.WTBWTools;
+import com.wtbw.mods.tools.config.CommonConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

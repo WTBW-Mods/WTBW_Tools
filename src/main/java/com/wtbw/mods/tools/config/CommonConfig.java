@@ -1,9 +1,9 @@
-package com.wtbw.tools.config;
+package com.wtbw.mods.tools.config;
 
-import com.wtbw.lib.config.BaseConfig;
-import com.wtbw.lib.config.SubConfig;
-import com.wtbw.tools.WTBWTools;
-import com.wtbw.tools.item.tools.WateringCan;
+import com.wtbw.mods.lib.config.BaseConfig;
+import com.wtbw.mods.lib.config.SubConfig;
+import com.wtbw.mods.tools.WTBWTools;
+import com.wtbw.mods.tools.item.tools.WateringCan;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.config.ModConfig;

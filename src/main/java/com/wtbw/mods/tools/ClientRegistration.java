@@ -1,6 +1,6 @@
-package com.wtbw.tools;
+package com.wtbw.mods.tools;
 
-import com.wtbw.tools.blocks.ModBlocks;
+import com.wtbw.mods.tools.blocks.ModBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 

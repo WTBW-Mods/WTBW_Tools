@@ -1,7 +1,7 @@
-package com.wtbw.tools.tile;
+package com.wtbw.mods.tools.tile;
 
 import com.google.common.collect.MapMaker;
-import com.wtbw.lib.util.Utilities;
+import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
