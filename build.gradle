@@ -114,6 +114,17 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     builtBy 'reobfJar'
 }
 
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier 'deobf'
+}
+
+build.dependsOn deobfJar
+
+artifacts {
+    archives deobfJar
+}
+
 if (ENV.LOCAL_MAVEN) {
     uploadArchives {
         repositories {
