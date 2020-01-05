@@ -1,7 +1,7 @@
 package com.wtbw.mods.tools.blocks;
 
 import com.wtbw.mods.lib.util.PlayEvent;
-import com.wtbw.mods.lib.util.RandomUtil;
+import com.wtbw.mods.lib.util.rand.RandomUtil;
 import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.block.*;
