@@ -18,7 +18,7 @@ Adds new tools
 [[dependencies.wtbw_tools]]
     modId="forge"
     mandatory=true
-    versionRange="[30.0.16,)"
+    versionRange="[30.0.30,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.wtbw_tools]]
@@ -30,12 +30,12 @@ Adds new tools
 [[dependencies.wtbw_tools]]
     modId="wtbw_lib"
     mandatory=true
-    versionRange="[1.0.0,)"
+    versionRange="[1.0.4,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.wtbw_tools]]
     modId="wtbw_core"
     mandatory=true
-    versionRange="[1.0.0,)"
+    versionRange="[1.0.5,)"
     ordering="NONE"
     side="BOTH"
