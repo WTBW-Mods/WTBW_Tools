@@ -1,5 +1,6 @@
 package com.wtbw.mods.tools.item.tools;
 
+import com.wtbw.mods.lib.util.PlayEvent;
 import com.wtbw.mods.tools.WTBWTools;
 import com.wtbw.mods.tools.config.CommonConfig;
 import com.wtbw.mods.lib.util.nbt.NBTHelper;
@@ -257,10 +258,10 @@ public class WateringCan extends Item
       {
         if (!crop.isMaxAge(state) && crop.canGrow(world, pos, state, world.isRemote))
         {
-          crop.grow(world, pos, state);
-          if (world.isRemote)
+          if (!world.isRemote)
           {
-            BoneMealItem.spawnBonemealParticles(world, pos, RandomUtil.range(rand, 3, 6));
+            crop.grow(world, pos, state);
+            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
           }
         }
       }
@@ -271,10 +272,7 @@ public class WateringCan extends Item
           if (!world.isRemote)
           {
             sapling.func_226942_a_((ServerWorld) world, pos, state, rand);
-          }
-          else
-          {
-            BoneMealItem.spawnBonemealParticles(world, pos, RandomUtil.range(rand, 3, 6));
+            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
           }
         }
       }
