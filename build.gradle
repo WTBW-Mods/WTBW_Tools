@@ -139,9 +139,10 @@ if (ENV.WTBW_CF_KEY) {
     curseforge {
         apiKey = ENV.WTBW_CF_KEY
         project {
-            id = "wtbw_tools"
+            id = "357092"
             releaseType = "beta"
             addGameVersion "1.15.1"
+            addGameVersion "Forge"
             relations {
                 requiredDependency 'wtbw_lib'
                 requiredDependency 'wtbw_core'
