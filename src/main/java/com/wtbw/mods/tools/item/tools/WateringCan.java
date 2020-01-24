@@ -203,7 +203,7 @@ public class WateringCan extends Item
       {
         if (!world.isRemote)
         {
-          ((SpreadableSnowyDirtBlock) block).func_225534_a_(state, (ServerWorld) world, pos, rand);
+          ((SpreadableSnowyDirtBlock) block).randomTick(state, (ServerWorld) world, pos, rand);
         }
         else
         {

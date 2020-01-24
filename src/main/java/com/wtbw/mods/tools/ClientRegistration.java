@@ -12,7 +12,7 @@ public class ClientRegistration
 {
   public static void setupRenderLayers()
   {
-    final RenderType translucent = RenderType.func_228645_f_();
+    final RenderType translucent = RenderType.translucent();
     
     RenderTypeLookup.setRenderLayer(ModBlocks.GREENHOUSE_GLASS, translucent);
   }

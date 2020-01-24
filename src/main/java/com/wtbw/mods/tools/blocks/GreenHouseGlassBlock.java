@@ -41,10 +41,10 @@ public class GreenHouseGlassBlock extends AbstractGlassBlock implements IBeaconB
 //  }
   
   @Override
-  public boolean func_229869_c_(BlockState p_229869_1_, IBlockReader p_229869_2_, BlockPos p_229869_3_) {
+  public boolean causesSuffocation(BlockState p_229869_1_, IBlockReader p_229869_2_, BlockPos p_229869_3_) {
     return false;
   }
-  
+
   @Override
   public DyeColor getColor()
   {
@@ -58,7 +58,7 @@ public class GreenHouseGlassBlock extends AbstractGlassBlock implements IBeaconB
   }
   
   @Override
-  public void func_225534_a_(BlockState state, ServerWorld world, BlockPos pos, Random rand)
+  public void tick(BlockState state, ServerWorld world, BlockPos pos, Random rand)
   {
     int maxRange = 25;
     int chance = 40;
