@@ -10,9 +10,8 @@ import com.wtbw.mods.tools.config.CommonConfig;
 import com.wtbw.mods.tools.item.tools.*;
 import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemTier;
-import net.minecraft.item.Items;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.*;
 
 /*
   @author: Naxanria
@@ -37,6 +36,13 @@ public class ToolsRegistrator extends Registrator
     register(new BaseBlockItem(ModBlocks.MAGNET_INHIBITOR,
       getItemProperties().addTooltip(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.magnet_inhibitor", 3).aqua().build())),
       "magnet_inhibitor");
+    
+    // copper tools/armour
+    registerArmourSet(ItemTierExt.COPPER);
+    registerTools(ItemTierExt.COPPER, "copper", -2.4f, 3, 2);
+    
+    registerArmourSet(ItemTierExt.COBALT);
+    registerTools(ItemTierExt.COBALT, "cobalt", -1.8f, 5, 3);
   
     int dMul = CommonConfig.instance().toolsDurabilityMultiplier.get();
     register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
@@ -66,6 +72,25 @@ public class ToolsRegistrator extends Registrator
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.QUARTZ), "watering_can_quartz");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.DIAMOND), "watering_can_diamond");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.ENDER), "watering_can_ender");
+  }
+  
+  private void registerTools(ItemTierExt tier, String name, float attackSpeed, float bonusAxeAttack, float bonusSwordAttack)
+  {
+    register(new PickaxeItem(tier, 1, attackSpeed, getItemProperties()), name + "_pickaxe");
+    register(new ShovelItem(tier, 1, attackSpeed, getItemProperties()), name + "_shovel");
+    register(new AxeItem(tier, tier.getAttackDamage() + bonusAxeAttack, attackSpeed, getItemProperties()), name + "_axe");
+    register(new SwordItem(tier, (int) (tier.getAttackDamage() + bonusSwordAttack), attackSpeed, getItemProperties()), name + "_sword");
+  }
+  
+  private void registerArmourSet(IItemTier tier)
+  {
+    ArmorMaterialExt material = (ArmorMaterialExt) ArmorMaterialExt.get(tier);
+    String name = material.getMaterialName();
+    
+    register(new ArmorItem(material, EquipmentSlotType.HEAD, getItemProperties()), name + "_helmet");
+    register(new ArmorItem(material, EquipmentSlotType.CHEST, getItemProperties()), name + "_chestplate");
+    register(new ArmorItem(material, EquipmentSlotType.LEGS, getItemProperties()), name + "_leggings");
+    register(new ArmorItem(material, EquipmentSlotType.FEET, getItemProperties()), name + "_boots");
   }
   
   @Override
