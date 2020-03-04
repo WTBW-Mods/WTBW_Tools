@@ -7,6 +7,7 @@ import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.blocks.GreenHouseGlassBlock;
 import com.wtbw.mods.tools.blocks.ModBlocks;
 import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.item.armour.CobaltArmour;
 import com.wtbw.mods.tools.item.tools.*;
 import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
 import net.minecraft.block.material.Material;
@@ -41,7 +42,13 @@ public class ToolsRegistrator extends Registrator
     registerArmourSet(ItemTierExt.COPPER);
     registerTools(ItemTierExt.COPPER, "copper", -2.4f, 3, 2);
     
-    registerArmourSet(ItemTierExt.COBALT);
+//    registerArmourSet(ItemTierExt.COBALT);
+    ArmorMaterialExt cobaltArmorMaterial = (ArmorMaterialExt) ArmorMaterialExt.get(ItemTierExt.COBALT);
+    register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.HEAD, getItemProperties()), "cobalt_helmet");
+    register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.CHEST, getItemProperties()), "cobalt_chestplate");
+    register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.LEGS, getItemProperties()), "cobalt_leggings");
+    register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "cobalt_boots");
+    
     registerTools(ItemTierExt.COBALT, "cobalt", -1.8f, 5, 3);
   
     int dMul = CommonConfig.instance().toolsDurabilityMultiplier.get();

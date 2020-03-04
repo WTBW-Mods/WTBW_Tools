@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " C ",
+    " D "
+  ],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "C": {
+      "tag": "forge:ingots/cobalt"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:cobalt_sword"
+  }
+}

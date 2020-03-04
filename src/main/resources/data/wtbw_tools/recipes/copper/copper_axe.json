@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC ",
+    "CR ",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:copper_axe"
+  }
+}

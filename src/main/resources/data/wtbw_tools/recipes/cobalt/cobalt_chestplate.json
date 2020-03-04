@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CDC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond_chestplate"
+    },
+    "C": {
+      "tag": "forge:ingots/cobalt"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:cobalt_chestplate"
+  }
+}

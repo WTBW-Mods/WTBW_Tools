@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CDC"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond_helmet"
+    },
+    "C": {
+      "tag": "forge:ingots/cobalt"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:cobalt_helmet"
+  }
+}
