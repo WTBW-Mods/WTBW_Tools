@@ -28,6 +28,24 @@
   "item.wtbw_tools.trowel": "Trowel",
   "item.wtbw_tools.magnet": "Magnet",
 
+  "item.wtbw_tools.copper_helmet": "Copper Helmet",
+  "item.wtbw_tools.copper_chestplate": "Copper Chestplate",
+  "item.wtbw_tools.copper_leggings": "Copper Leggings",
+  "item.wtbw_tools.copper_boots": "Copper Boots",
+  "item.wtbw_tools.copper_axe": "Copper Axe",
+  "item.wtbw_tools.copper_pickaxe": "Copper Pickaxe",
+  "item.wtbw_tools.copper_shovel": "Copper Shovel",
+  "item.wtbw_tools.copper_sword": "Copper Sword",
+
+  "item.wtbw_tools.cobalt_helmet": "Cobalt Helmet",
+  "item.wtbw_tools.cobalt_chestplate": "Cobalt Chestplate",
+  "item.wtbw_tools.cobalt_leggings": "Cobalt Leggings",
+  "item.wtbw_tools.cobalt_boots": "Cobalt Boots",
+  "item.wtbw_tools.cobalt_axe": "Cobalt Axe",
+  "item.wtbw_tools.cobalt_pickaxe": "Cobalt Pickaxe",
+  "item.wtbw_tools.cobalt_shovel": "Cobalt Shovel",
+  "item.wtbw_tools.cobalt_sword": "Cobalt Sword",
+
   "block.wtbw_tools.magnet_inhibitor": "Magnet Inhibitor",
 
   "wtbw_tools.tooltip.swap_target_pre": "Target block:",

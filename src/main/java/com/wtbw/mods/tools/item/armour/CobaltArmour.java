@@ -1,14 +1,23 @@
 package com.wtbw.mods.tools.item.armour;
 
+import com.wtbw.mods.lib.util.TextComponentBuilder;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 /*
   @author: Naxanria
@@ -49,12 +58,43 @@ public class CobaltArmour extends ArmorItem
                 break;
           
               case HEAD:
-                player.addPotionEffect(new EffectInstance(Effects.ABSORPTION, duration, 0, true, false));
+                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 0, true, false));
                 break;
             }
           }
         }
       }
     }
+  }
+  
+  @Override
+  public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
+  {
+    Effect effect = null;
+    switch (getEquipmentSlot())
+    {
+      case FEET:
+        effect = Effects.JUMP_BOOST;
+        break;
+        
+      case LEGS:
+        effect = Effects.SPEED;
+        break;
+        
+      case CHEST:
+        effect = Effects.REGENERATION;
+        break;
+      
+      case HEAD:
+        effect = Effects.WATER_BREATHING;
+        break;
+    }
+    if (effect != null)
+    {
+      tooltip.add(effect.getDisplayName().setStyle(new Style().setColor(TextFormatting.AQUA)));
+//      tooltip.add(TextComponentBuilder.create(effect.getDisplayName()).aqua().build());
+    }
+    
+    super.addInformation(stack, worldIn, tooltip, flagIn);
   }
 }

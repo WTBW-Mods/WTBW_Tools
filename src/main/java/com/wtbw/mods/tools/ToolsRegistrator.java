@@ -40,9 +40,9 @@ public class ToolsRegistrator extends Registrator
     
     // copper tools/armour
     registerArmourSet(ItemTierExt.COPPER);
-    registerTools(ItemTierExt.COPPER, "copper", -2.4f, 3, 2);
+    registerTools(ItemTierExt.COPPER, "copper", -2.4f, 3, 1);
     
-//    registerArmourSet(ItemTierExt.COBALT);
+    // cobalt armour/tools
     ArmorMaterialExt cobaltArmorMaterial = (ArmorMaterialExt) ArmorMaterialExt.get(ItemTierExt.COBALT);
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.HEAD, getItemProperties()), "cobalt_helmet");
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.CHEST, getItemProperties()), "cobalt_chestplate");
