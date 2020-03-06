@@ -35,9 +35,8 @@ public class ArmorMaterialExt implements IArmorMaterial
   private final int[] reduction;
   private final SoundEvent soundEvent;
   
-  @OnlyIn(Dist.CLIENT)
   private final String fullname;
-  @OnlyIn(Dist.CLIENT)
+  
   private final String name;
   
   private final float toughness;
