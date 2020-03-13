@@ -30,7 +30,7 @@ Adds new tools
 [[dependencies.wtbw_tools]]
     modId="wtbw_lib"
     mandatory=true
-    versionRange="[1.0.9,)"
+    versionRange="[1.0.12,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.wtbw_tools]]
