@@ -79,6 +79,8 @@ public class ToolsRegistrator extends Registrator
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.QUARTZ), "watering_can_quartz");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.DIAMOND), "watering_can_diamond");
     register(new WateringCan(getItemProperties().maxStackSize(1), WateringCan.Tier.ENDER), "watering_can_ender");
+    
+    register(new SlimeChunkFinderItem(getItemProperties().maxStackSize(1).maxDamage(25)), "slime_chunk_finder");
   }
   
   private void registerTools(ItemTierExt tier, String name, float attackSpeed, float bonusAxeAttack, float bonusSwordAttack)

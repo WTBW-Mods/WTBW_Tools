@@ -45,6 +45,7 @@
   "item.wtbw_tools.cobalt_pickaxe": "Cobalt Pickaxe",
   "item.wtbw_tools.cobalt_shovel": "Cobalt Shovel",
   "item.wtbw_tools.cobalt_sword": "Cobalt Sword",
+  "item.wtbw_tools.slime_chunk_finder": "Slime Chunk Finder",
 
   "block.wtbw_tools.magnet_inhibitor": "Magnet Inhibitor",
 
@@ -59,6 +60,11 @@
 
   "wtbw_tools.text.swap_target_changed": "Changed block to ",
   "wtbw_tools.text.cycled": "Changed radius to %s",
+
+  "wtbw_tools.text.slime_chunk_finder.found": "This is a slime chunk!",
+  "wtbw_tools.text.slime_chunk_finder.not_found": "Could not find a slime chunk!",
+  "wtbw_tools.text.slime_chunk_finder.direction": "Found nearest slime chunk in the %s direction.",
+  "wtbw_tools.text.slime_chunk_finder.no_slime_dimension": "Only works in the overworld",
 
   "block.wtbw_tools.greenhouse_glass": "Greenhouse Glass"
 }

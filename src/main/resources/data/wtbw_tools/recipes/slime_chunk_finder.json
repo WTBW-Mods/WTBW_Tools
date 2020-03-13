@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  L",
+    " C ",
+    "C  "
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "L": {
+      "tag": "forge:dyes/lime"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:slime_chunk_finder"
+  }
+}
