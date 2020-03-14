@@ -26,6 +26,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -144,9 +145,9 @@ public class WateringCan extends Item
     {
       return;
     }
-    
+  
     CommonConfig config = CommonConfig.instance();
-    
+  
     World world = player.world;
     Random rand = world.rand;
     BlockRayTraceResult lookingAt = Utilities.getLookingAt((PlayerEntity) player, 5, RayTraceContext.FluidMode.SOURCE_ONLY);
@@ -154,25 +155,25 @@ public class WateringCan extends Item
     {
       return;
     }
-    
+  
     BlockState lookingState = world.getBlockState(lookingAt.getPos());
     if (lookingState.getFluidState().getFluid() == Fluids.WATER)
     {
       // todo? Make refill be configurable
       changeWater(stack, config.wateringCanRefillRate.get());
-      
+  
       return;
     }
-    
+  
     // enough maxWater
     if (!((PlayerEntity) player).isCreative() && changeWater(stack, -wateringCanData.waterUse) == 0)
     {
       return;
     }
-    
+  
     boolean spreadGrass = config.wateringCanSpreadGrass.get();
     boolean moisturize = config.wateringCanMoisterize.get();
-    
+  
     // get in radius
     List<BlockPos> blocks = Utilities.getBlocks(lookingAt.getPos(), Direction.DOWN, wateringCanData.radius);
     for (BlockPos pos : blocks)
@@ -183,22 +184,22 @@ public class WateringCan extends Item
         double x = pos.getX() + rand.nextDouble();
         double y = pos.getY() + rand.nextDouble() + .7;
         double z = pos.getZ() + rand.nextDouble();
-        
+  
         world.addParticle(ParticleTypes.RAIN, x, y, z, 0, 0, 0);
       }
-      
+  
       // Chance: P/20 -> 1/20th of a chance per tick, naively make it be ~P/sec
       if (!RandomUtil.chance(rand, (wateringCanData.chance / 100f / 20f)))
       {
         continue;
       }
-      
-      
+  
+  
       BlockState state = world.getBlockState(pos);
       Block block = state.getBlock();
       CropsBlock crop = null;
       SaplingBlock sapling = null;
-      
+  
       if (spreadGrass && block instanceof SpreadableSnowyDirtBlock)
       {
         if (!world.isRemote)
@@ -209,10 +210,54 @@ public class WateringCan extends Item
         {
           BoneMealItem.spawnBonemealParticles(world, pos.up(), RandomUtil.range(rand, 3, 6));
         }
-        
+  
         continue;
       }
-      
+  
+      if (block == Blocks.SUGAR_CANE)
+      {
+  
+        int length;
+        for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.SUGAR_CANE; length++)
+        {
+        }
+        if (length < 3)
+        {
+          int up;
+          for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.SUGAR_CANE; up++)
+          {
+            length++;
+          }
+          if (length < 3)
+          {
+            if (up > 1)
+            {
+              pos = pos.up(up);
+            }
+  
+            if (world.isAirBlock(pos.up()))
+            {
+              int age = state.get(SugarCaneBlock.AGE);
+              if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
+              {
+                if (age == 15)
+                {
+                  world.setBlockState(pos.up(), Blocks.SUGAR_CANE.getDefaultState(), 4);
+                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, 0), 4);
+                }
+                else
+                {
+                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, age + 1), 4);
+                }
+              }
+              bonemeal(world, pos);
+              ForgeHooks.onCropsGrowPost(world, pos, state);
+              continue;
+            }
+          }
+        }
+      }
+  
       if (block instanceof CropsBlock)
       {
         crop = (CropsBlock) block;
@@ -221,10 +266,10 @@ public class WateringCan extends Item
       {
         sapling = (SaplingBlock) block;
       }
-      
+  
       if (crop == null && sapling == null)
       {
-        
+    
         if (moisturize && block instanceof FarmlandBlock)
         {
           int moisture = state.get(FarmlandBlock.MOISTURE);
@@ -234,11 +279,11 @@ public class WateringCan extends Item
             world.setBlockState(pos, newState, 3);
           }
         }
-        
+    
         pos = pos.up();
         state = world.getBlockState(pos);
         block = state.getBlock();
-        
+    
         if (block instanceof CropsBlock)
         {
           crop = (CropsBlock) block;
@@ -248,12 +293,12 @@ public class WateringCan extends Item
           sapling = (SaplingBlock) block;
         }
       }
-      
+  
       if (crop == null && sapling == null)
       {
         continue;
       }
-      
+  
       if (crop != null)
       {
         if (!crop.isMaxAge(state) && crop.canGrow(world, pos, state, world.isRemote))
@@ -261,7 +306,7 @@ public class WateringCan extends Item
           if (!world.isRemote)
           {
             crop.grow(world, pos, state);
-            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
+            bonemeal(world, pos);
           }
         }
       }
@@ -272,11 +317,17 @@ public class WateringCan extends Item
           if (!world.isRemote)
           {
             sapling.func_226942_a_((ServerWorld) world, pos, state, rand);
-            PlayEvent.boneMeal(world, pos, RandomUtil.range(rand, 3, 6));
+            bonemeal(world, pos);
           }
         }
       }
     }
+  
+  }
+  
+  private void bonemeal(World world, BlockPos pos)
+  {
+    PlayEvent.boneMeal(world, pos, RandomUtil.range(world.rand, 3, 6));
   }
   
   @Override
