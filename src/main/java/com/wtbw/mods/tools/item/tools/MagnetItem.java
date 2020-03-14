@@ -78,12 +78,13 @@ public class MagnetItem extends Item
                 continue;
               }
 
-              float speed = 3;
+              float speed = 1.5f;
               Vec3d moveVec = entity.getPositionVec().subtract(itemEntity.getPositionVec()).add(0, 1, 0).normalize().mul(speed, speed, speed);
               if (itemEntity.collidedHorizontally)
               {
                 moveVec.add(0, 0.3, 0);
               }
+//              moveVec = moveVec;
               itemEntity.setMotion(moveVec);
             }
           }

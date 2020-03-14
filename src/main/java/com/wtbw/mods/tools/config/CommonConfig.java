@@ -25,7 +25,7 @@ public class CommonConfig extends BaseConfig
     final Pair<CommonConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CommonConfig::new);
     instance = specPair.getLeft();
     
-    ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, specPair.getRight());
+    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, specPair.getRight());
   }
   
   public ForgeConfigSpec.BooleanValue wateringCanSpreadGrass;
@@ -133,9 +133,9 @@ public class CommonConfig extends BaseConfig
     push("magnet");
     
     magnetTickRate = builder
-      .comment("How often the magnet needs to check to magnetize, in ticks", "default: 10")
+      .comment("How often the magnet needs to check to magnetize, in ticks", "default: 1")
       .translation(key("tools.magnet.tick_rate"))
-      .defineInRange("tick_rate", 10, 1, 60);
+      .defineInRange("tick_rate", 1, 1, 60);
     
     magnetRadius = builder
       .comment("The radius (cube) that items can be magnetized", "default: 6")
