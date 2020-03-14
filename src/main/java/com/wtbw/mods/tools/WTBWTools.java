@@ -1,11 +1,14 @@
 package com.wtbw.mods.tools;
 
+import com.wtbw.mods.lib.ClientSetup;
 import com.wtbw.mods.lib.keybinds.LibKeyBinds;
+import com.wtbw.mods.tools.client.RenderManager;
 import com.wtbw.mods.tools.config.CommonConfig;
 import com.wtbw.mods.tools.item.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -44,6 +47,7 @@ public class WTBWTools
   
   public void clientSetup(final FMLClientSetupEvent event)
   {
-    ClientRegistration.setupRenderLayers();
+    ClientRegistration.init();
+//    MinecraftForge.EVENT_BUS.addListener(RenderManager::onDrawEnd);
   }
 }
