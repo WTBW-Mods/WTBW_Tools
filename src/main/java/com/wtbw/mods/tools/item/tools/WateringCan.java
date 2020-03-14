@@ -14,6 +14,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -27,6 +28,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.Constants;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -187,6 +189,10 @@ public class WateringCan extends Item
   
         world.addParticle(ParticleTypes.RAIN, x, y, z, 0, 0, 0);
       }
+      if (world.isRemote)
+      {
+        continue;
+      }
   
       // Chance: P/20 -> 1/20th of a chance per tick, naively make it be ~P/sec
       if (!RandomUtil.chance(rand, (wateringCanData.chance / 100f / 20f)))
@@ -242,20 +248,68 @@ public class WateringCan extends Item
               {
                 if (age == 15)
                 {
-                  world.setBlockState(pos.up(), Blocks.SUGAR_CANE.getDefaultState(), 4);
-                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, 0), 4);
+                  world.setBlockState(pos.up(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
                 }
                 else
                 {
-                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, age + 1), 4);
+                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
                 }
               }
               bonemeal(world, pos);
               ForgeHooks.onCropsGrowPost(world, pos, state);
-              continue;
+
             }
           }
         }
+        
+        continue;
+      }
+      
+      if (block == Blocks.CACTUS)
+      {
+        int length;
+        for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.CACTUS; length++)
+        {
+        }
+        if (length < 3)
+        {
+          int up;
+          for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.CACTUS; up++)
+          {
+            length++;
+          }
+          if (length < 3)
+          {
+            if (up > 1)
+            {
+              pos = pos.up(up);
+            }
+      
+            if (world.isAirBlock(pos.up()))
+            {
+              int age = state.get(SugarCaneBlock.AGE);
+              if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
+              {
+                if (age == 15)
+                {
+                  world.setBlockState(pos.up(), Blocks.CACTUS.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+                  world.setBlockState(pos, state.with(CactusBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+                  state.neighborChanged(world, pos.up(), Blocks.CACTUS, pos, false);
+//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+                }
+                else
+                {
+                  world.setBlockState(pos, state.with(CactusBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+                }
+              }
+              bonemeal(world, pos);
+              ForgeHooks.onCropsGrowPost(world, pos, state);
+            }
+          }
+        }
+        continue;
       }
   
       if (block instanceof CropsBlock)
