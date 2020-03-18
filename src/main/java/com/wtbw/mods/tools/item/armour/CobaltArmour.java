@@ -1,6 +1,8 @@
 package com.wtbw.mods.tools.item.armour;
 
+import com.wtbw.mods.lib.WTBWLib;
 import com.wtbw.mods.lib.util.TextComponentBuilder;
+import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -45,9 +47,9 @@ public class CobaltArmour extends ArmorItem
           {
             switch (getEquipmentSlot())
             {
-              case FEET:
-                player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, duration, 0, true, false));
-                break;
+//              case FEET:
+//                player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, duration, 0, true, false));
+//                break;
           
               case LEGS:
                 player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 0, true, false));
@@ -73,9 +75,9 @@ public class CobaltArmour extends ArmorItem
     Effect effect = null;
     switch (getEquipmentSlot())
     {
-      case FEET:
-        effect = Effects.JUMP_BOOST;
-        break;
+//      case FEET:
+//        effect = Effects.JUMP_BOOST;
+//        break;
         
       case LEGS:
         effect = Effects.SPEED;
@@ -93,6 +95,10 @@ public class CobaltArmour extends ArmorItem
     {
       tooltip.add(effect.getDisplayName().setStyle(new Style().setColor(TextFormatting.AQUA)));
 //      tooltip.add(TextComponentBuilder.create(effect.getDisplayName()).aqua().build());
+    }
+    else if (getEquipmentSlot() == EquipmentSlotType.FEET)
+    {
+      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.cobalt_boots").aqua().build());
     }
     
     super.addInformation(stack, worldIn, tooltip, flagIn);

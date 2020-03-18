@@ -58,6 +58,8 @@
   "wtbw_tools.tooltip.radius": "Radius: %s",
   "wtbw_tools.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
+  "wtbw_tools.tooltip.cobalt_boots": "Negates fall damage",
+
   "wtbw_tools.text.swap_target_changed": "Changed block to ",
   "wtbw_tools.text.cycled": "Changed radius to %s",
 

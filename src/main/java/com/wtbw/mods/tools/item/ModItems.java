@@ -12,4 +12,5 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModItems
 {
   public static final Item DIAMOND_HAMMER = Items.AIR;
+  public static final Item COBALT_BOOTS = Items.AIR;
 }

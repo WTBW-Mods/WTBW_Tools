@@ -4,6 +4,7 @@ import com.wtbw.mods.lib.ClientSetup;
 import com.wtbw.mods.lib.keybinds.LibKeyBinds;
 import com.wtbw.mods.tools.client.RenderManager;
 import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.event.ArmourEvents;
 import com.wtbw.mods.tools.item.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -43,6 +44,7 @@ public class WTBWTools
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> LibKeyBinds.DEFAULT.registerToolRadiusKeyBinds());
   
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+    MinecraftForge.EVENT_BUS.addListener(ArmourEvents::onFallDamageTaken);
   }
   
   public void clientSetup(final FMLClientSetupEvent event)
