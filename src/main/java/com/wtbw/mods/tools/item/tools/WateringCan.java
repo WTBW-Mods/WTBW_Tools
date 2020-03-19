@@ -222,93 +222,19 @@ public class WateringCan extends Item
   
       if (block == Blocks.SUGAR_CANE)
       {
-  
-        int length;
-        for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.SUGAR_CANE; length++)
-        {
-        }
-        if (length < 3)
-        {
-          int up;
-          for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.SUGAR_CANE; up++)
-          {
-            length++;
-          }
-          if (length < 3)
-          {
-            if (up > 1)
-            {
-              pos = pos.up(up);
-            }
-  
-            if (world.isAirBlock(pos.up()))
-            {
-              int age = state.get(SugarCaneBlock.AGE);
-              if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
-              {
-                if (age == 15)
-                {
-                  world.setBlockState(pos.up(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                }
-                else
-                {
-                  world.setBlockState(pos, state.with(SugarCaneBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                }
-              }
-              bonemeal(world, pos);
-              ForgeHooks.onCropsGrowPost(world, pos, state);
-
-            }
-          }
-        }
-        
+        sugarcane(world, pos, state);
         continue;
       }
       
       if (block == Blocks.CACTUS)
       {
-        int length;
-        for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.CACTUS; length++)
-        {
-        }
-        if (length < 3)
-        {
-          int up;
-          for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.CACTUS; up++)
-          {
-            length++;
-          }
-          if (length < 3)
-          {
-            if (up > 1)
-            {
-              pos = pos.up(up);
-            }
+        cactus(world, pos, state);
+        continue;
+      }
       
-            if (world.isAirBlock(pos.up()))
-            {
-              int age = state.get(SugarCaneBlock.AGE);
-              if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
-              {
-                if (age == 15)
-                {
-                  world.setBlockState(pos.up(), Blocks.CACTUS.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                  world.setBlockState(pos, state.with(CactusBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                  state.neighborChanged(world, pos.up(), Blocks.CACTUS, pos, false);
-//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                }
-                else
-                {
-                  world.setBlockState(pos, state.with(CactusBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
-                }
-              }
-              bonemeal(world, pos);
-              ForgeHooks.onCropsGrowPost(world, pos, state);
-            }
-          }
-        }
+      if (block == Blocks.NETHER_WART)
+      {
+        netherWart(world, pos, state);
         continue;
       }
   
@@ -376,7 +302,103 @@ public class WateringCan extends Item
         }
       }
     }
+  }
   
+  private void netherWart(World world, BlockPos pos, BlockState state)
+  {
+    int age = state.get(NetherWartBlock.AGE);
+    if (age < 3)
+    {
+      age++;
+      world.setBlockState(pos, state.with(NetherWartBlock.AGE, age), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+      bonemeal(world, pos);
+    }
+  }
+  
+  private void cactus(World world, BlockPos pos, BlockState state)
+  {
+    int length;
+    for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.CACTUS; length++)
+    { }
+    if (length < 3)
+    {
+      int up;
+      for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.CACTUS; up++)
+      {
+        length++;
+      }
+      if (length < 3)
+      {
+        if (up > 1)
+        {
+          pos = pos.up(up);
+        }
+  
+        if (world.isAirBlock(pos.up()))
+        {
+          int age = state.get(SugarCaneBlock.AGE);
+          if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
+          {
+            if (age == 15)
+            {
+              world.setBlockState(pos.up(), Blocks.CACTUS.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+              world.setBlockState(pos, state.with(CactusBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+              state.neighborChanged(world, pos.up(), Blocks.CACTUS, pos, false);
+//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+            }
+            else
+            {
+              world.setBlockState(pos, state.with(CactusBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+            }
+          }
+          bonemeal(world, pos);
+          ForgeHooks.onCropsGrowPost(world, pos, state);
+        }
+      }
+    }
+  }
+  
+  private void sugarcane(World world, BlockPos pos, BlockState state)
+  {
+    int length;
+    for (length = 1; world.getBlockState(pos.down(length)).getBlock() == Blocks.SUGAR_CANE; length++)
+    { }
+    if (length < 3)
+    {
+      int up;
+      for (up = 1; world.getBlockState(pos.up(up)).getBlock() == Blocks.SUGAR_CANE; up++)
+      {
+        length++;
+      }
+      if (length < 3)
+      {
+        if (up > 1)
+        {
+          pos = pos.up(up);
+        }
+
+        if (world.isAirBlock(pos.up()))
+        {
+          int age = state.get(SugarCaneBlock.AGE);
+          if (ForgeHooks.onCropsGrowPre(world, pos, state, true))
+          {
+            if (age == 15)
+            {
+              world.setBlockState(pos.up(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+              world.setBlockState(pos, state.with(SugarCaneBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+//                  world.notifyBlockUpdate(pos.up(), Blocks.AIR.getDefaultState(), Blocks.SUGAR_CANE.getDefaultState(), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+            }
+            else
+            {
+              world.setBlockState(pos, state.with(SugarCaneBlock.AGE, age + 1), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+            }
+          }
+          bonemeal(world, pos);
+          ForgeHooks.onCropsGrowPost(world, pos, state);
+
+        }
+      }
+    }
   }
   
   private void bonemeal(World world, BlockPos pos)
