@@ -161,6 +161,7 @@ public class CommonConfig extends BaseConfig
     public ForgeConfigSpec.IntValue chance;
     
     public ForgeConfigSpec.BooleanValue useWater;
+    public ForgeConfigSpec.BooleanValue autoHarvest;
     
     public WateringCanConfig(WateringCan.Tier tier, String name, ForgeConfigSpec.Builder builder)
     {
@@ -188,6 +189,11 @@ public class CommonConfig extends BaseConfig
         .comment("Use water at all, or have it be infinite use", "Default: " + data.useWater)
         .translation(parent.key(baseKey + "use_water"))
         .define("useWater", data.useWater);
+      
+      autoHarvest = builder
+        .comment("Auto harvest fully grown crops", "Default: " + data.autoHarvest)
+        .translation(parent.key(baseKey + "auto_harvest"))
+        .define("autoHarvest", data.autoHarvest);
       
       maxWater = builder
         .comment("The maximum amount of water the watering can can hold")

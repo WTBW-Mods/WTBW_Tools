@@ -56,6 +56,7 @@
   "wtbw_tools.tooltip.trowel": "Places random blocks from your hotbar",
   "wtbw_tools.tooltip.water": "Water: %s/%s",
   "wtbw_tools.tooltip.radius": "Radius: %s",
+  "wtbw_tools.tooltip.harvest": "Autoharvest",
   "wtbw_tools.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
   "wtbw_tools.tooltip.cobalt_boots": "Negates fall damage",

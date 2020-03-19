@@ -1,6 +1,7 @@
 package com.wtbw.mods.tools.item.tools;
 
 import com.wtbw.mods.lib.util.PlayEvent;
+import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.lib.util.Utilities;
 import com.wtbw.mods.lib.util.nbt.NBTHelper;
 import com.wtbw.mods.lib.util.rand.RandomUtil;
@@ -56,6 +57,7 @@ public class WateringCan extends Item
     public int chance;
     
     public boolean useWater = true;
+    public boolean autoHarvest = false;
     
     public WateringCanData(int radius, int maxWater, int waterUse, int chance)
     {
@@ -70,6 +72,13 @@ public class WateringCan extends Item
       useWater = false;
       return this;
     }
+    
+    public WateringCanData autoHarvest()
+    {
+      autoHarvest = true;
+      return this;
+    }
+    
   }
   
   private static Map<Tier, WateringCanData> tierMap = new HashMap<Tier, WateringCanData>()
@@ -77,7 +86,7 @@ public class WateringCan extends Item
     put(Tier.BASIC, new WateringCanData(3, 1000, 5, 10));
     put(Tier.QUARTZ, new WateringCanData(3, 5000, 5, 25));
     put(Tier.DIAMOND, new WateringCanData(5, 10000, 5, 35));
-    put(Tier.ENDER, new WateringCanData(7, 10000, 5, 50).noWater());
+    put(Tier.ENDER, new WateringCanData(7, 10000, 5, 50).noWater().autoHarvest());
   }};
   
   public static WateringCanData getData(Tier tier)
@@ -90,7 +99,7 @@ public class WateringCan extends Item
   
   public WateringCan(Properties properties, Tier tier)
   {
-    super(properties);
+    super(properties.rarity(tier == Tier.ENDER ? Rarity.EPIC : tier == Tier.DIAMOND ? Rarity.RARE : Rarity.COMMON));
     
     this.tier = tier;
     wateringCanData = tierMap.getOrDefault(tier, tierMap.get(Tier.BASIC));
@@ -298,6 +307,12 @@ public class WateringCan extends Item
             bonemeal(world, pos);
           }
         }
+        
+        else if (wateringCanData.autoHarvest && crop.isMaxAge(state))
+        {
+          Utilities.dropItems(world, Block.getDrops(state, (ServerWorld) world, pos, null), pos);
+          world.setBlockState(pos, crop.withAge(0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
+        }
       }
       else
       {
@@ -321,6 +336,11 @@ public class WateringCan extends Item
       age++;
       world.setBlockState(pos, state.with(NetherWartBlock.AGE, age), Constants.BlockFlags.DEFAULT_AND_RERENDER);
       bonemeal(world, pos);
+    }
+    else if (age == 3 && wateringCanData.autoHarvest)
+    {
+      Utilities.dropItems(world, Block.getDrops(state, (ServerWorld) world, pos, null), pos);
+      world.setBlockState(pos, state.with(NetherWartBlock.AGE, 0), Constants.BlockFlags.DEFAULT_AND_RERENDER);
     }
   }
   
@@ -424,6 +444,11 @@ public class WateringCan extends Item
       tooltip.add(new TranslationTextComponent(WTBWTools.MODID + ".tooltip.water", water, wateringCanData.maxWater));
     }
     
+    if (wateringCanData.autoHarvest)
+    {
+      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.harvest").gold().build());
+    }
+    
     tooltip.add(new TranslationTextComponent(WTBWTools.MODID + ".tooltip.radius", wateringCanData.radius));
     
     super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -439,5 +464,11 @@ public class WateringCan extends Item
   public UseAction getUseAction(ItemStack stack)
   {
     return UseAction.BLOCK;
+  }
+  
+  @Override
+  public boolean hasEffect(ItemStack stack)
+  {
+    return tier == Tier.ENDER;
   }
 }
