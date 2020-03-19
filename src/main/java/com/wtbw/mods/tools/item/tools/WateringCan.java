@@ -1,11 +1,11 @@
 package com.wtbw.mods.tools.item.tools;
 
 import com.wtbw.mods.lib.util.PlayEvent;
-import com.wtbw.mods.tools.WTBWTools;
-import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.lib.util.Utilities;
 import com.wtbw.mods.lib.util.nbt.NBTHelper;
 import com.wtbw.mods.lib.util.rand.RandomUtil;
-import com.wtbw.mods.lib.util.Utilities;
+import com.wtbw.mods.tools.WTBWTools;
+import com.wtbw.mods.tools.config.CommonConfig;
 import net.minecraft.block.*;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +14,6 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -56,12 +55,20 @@ public class WateringCan extends Item
     public int waterUse;
     public int chance;
     
+    public boolean useWater = true;
+    
     public WateringCanData(int radius, int maxWater, int waterUse, int chance)
     {
       this.radius = radius;
       this.maxWater = maxWater;
       this.waterUse = waterUse;
       this.chance = chance;
+    }
+    
+    public WateringCanData noWater()
+    {
+      useWater = false;
+      return this;
     }
   }
   
@@ -70,7 +77,7 @@ public class WateringCan extends Item
     put(Tier.BASIC, new WateringCanData(3, 1000, 5, 10));
     put(Tier.QUARTZ, new WateringCanData(3, 5000, 5, 25));
     put(Tier.DIAMOND, new WateringCanData(5, 10000, 5, 35));
-    put(Tier.ENDER, new WateringCanData(7, 10000, 5, 50));
+    put(Tier.ENDER, new WateringCanData(7, 10000, 5, 50).noWater());
   }};
   
   public static WateringCanData getData(Tier tier)
@@ -118,7 +125,7 @@ public class WateringCan extends Item
   @Override
   public boolean showDurabilityBar(ItemStack stack)
   {
-    return getWater(stack) < wateringCanData.maxWater;
+    return wateringCanData.useWater && getWater(stack) < wateringCanData.maxWater;
   }
   
   @Override
@@ -159,18 +166,20 @@ public class WateringCan extends Item
     }
   
     BlockState lookingState = world.getBlockState(lookingAt.getPos());
-    if (lookingState.getFluidState().getFluid() == Fluids.WATER)
+    if (wateringCanData.useWater)
     {
-      // todo? Make refill be configurable
-      changeWater(stack, config.wateringCanRefillRate.get());
+      if (lookingState.getFluidState().getFluid() == Fluids.WATER)
+      {
+        changeWater(stack, config.wateringCanRefillRate.get());
+    
+        return;
+      }
   
-      return;
-    }
-  
-    // enough maxWater
-    if (!((PlayerEntity) player).isCreative() && changeWater(stack, -wateringCanData.waterUse) == 0)
-    {
-      return;
+      // enough maxWater
+      if (!((PlayerEntity) player).isCreative() && changeWater(stack, -wateringCanData.waterUse) == 0)
+      {
+        return;
+      }
     }
   
     boolean spreadGrass = config.wateringCanSpreadGrass.get();
@@ -410,7 +419,11 @@ public class WateringCan extends Item
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
   {
     int water = getWater(stack);
-    tooltip.add(new TranslationTextComponent(WTBWTools.MODID + ".tooltip.water", water, wateringCanData.maxWater));
+    if (wateringCanData.useWater)
+    {
+      tooltip.add(new TranslationTextComponent(WTBWTools.MODID + ".tooltip.water", water, wateringCanData.maxWater));
+    }
+    
     tooltip.add(new TranslationTextComponent(WTBWTools.MODID + ".tooltip.radius", wateringCanData.radius));
     
     super.addInformation(stack, worldIn, tooltip, flagIn);

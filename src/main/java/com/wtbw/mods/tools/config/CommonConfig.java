@@ -160,6 +160,8 @@ public class CommonConfig extends BaseConfig
     public ForgeConfigSpec.IntValue drainRate;
     public ForgeConfigSpec.IntValue chance;
     
+    public ForgeConfigSpec.BooleanValue useWater;
+    
     public WateringCanConfig(WateringCan.Tier tier, String name, ForgeConfigSpec.Builder builder)
     {
       super(builder);
@@ -181,6 +183,11 @@ public class CommonConfig extends BaseConfig
         .comment("The radius of effect for the watering can", "Number MUST be uneven")
         .translation(parent.key(baseKey + "radius"))
         .defineInRange("radius", data.radius, 1, 15);
+      
+      useWater = builder
+        .comment("Use water at all, or have it be infinite use", "Default: " + data.useWater)
+        .translation(parent.key(baseKey + "use_water"))
+        .define("useWater", data.useWater);
       
       maxWater = builder
         .comment("The maximum amount of water the watering can can hold")
