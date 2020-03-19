@@ -4,6 +4,8 @@ import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -45,7 +47,7 @@ public class GreatAxeItem extends AxeItem
         PlayerEntity player = (PlayerEntity) entity;
         if (!player.isCrouching())
         {
-          breakNeighbours(world, pos, (ServerPlayerEntity) player, true);
+          breakNeighbours(world, pos, (ServerPlayerEntity) player, true, stack);
           return true;
         }
         else
@@ -72,7 +74,7 @@ public class GreatAxeItem extends AxeItem
 //    return super.canHarvestBlock(state);
   }
   
-  private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem)
+  private void breakNeighbours(World world, BlockPos pos, ServerPlayerEntity player, boolean damageItem, ItemStack stack)
   {
     BlockRayTraceResult rayTraceResult = Utilities.getLookingAt(player, 6);
     Direction facing = rayTraceResult.getFace();
@@ -101,6 +103,7 @@ public class GreatAxeItem extends AxeItem
         }
         
         Utilities.dropItems(world, Block.getDrops(blockState, (ServerWorld) world, blockPos, null, player, player.getHeldItemMainhand()), blockPos);
+        Utilities.spawnExp(world, blockPos, blockState, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack), EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack));
         blockState.spawnAdditionalDrops(world, blockPos, player.getHeldItemMainhand());
       }
     }
