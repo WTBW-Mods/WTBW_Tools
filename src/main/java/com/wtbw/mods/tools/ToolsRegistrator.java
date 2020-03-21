@@ -28,7 +28,7 @@ public class ToolsRegistrator extends Registrator
   protected void registerAllBlocks()
   {
     register(new BaseTileBlock<>(getBlockProperties(Material.IRON, 4), (world, state) -> new MagnetInhibitorTileEntity()), "magnet_inhibitor", false);
-    register(new GreenHouseGlassBlock(getBlockProperties(Material.GLASS, 1).func_226896_b_()), "greenhouse_glass");
+    register(new GreenHouseGlassBlock(getBlockProperties(Material.GLASS, 1).variableOpacity()), "greenhouse_glass");
   }
   
   @Override

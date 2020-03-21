@@ -104,6 +104,6 @@ public class SlimeChunkFinderItem extends Item
       }
     }
   
-    return ActionResult.func_226249_b_(stack);
+    return ActionResult.resultSuccess(stack);
   }
 }

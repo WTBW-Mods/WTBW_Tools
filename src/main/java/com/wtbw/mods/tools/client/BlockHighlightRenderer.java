@@ -11,20 +11,22 @@ import com.wtbw.mods.tools.item.tools.GreatAxeItem;
 import com.wtbw.mods.tools.item.tools.HammerItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Matrix4f;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.Vector3f;
+import net.minecraft.client.renderer.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -62,6 +64,11 @@ public class BlockHighlightRenderer extends Renderer
   @Override
   public void render(RenderWorldLastEvent event, ItemStack stack)
   {
+    if (ClientSetup.getPlayer().isCrouching())
+    {
+      return;
+    }
+    
     int range = this.rangeSupplier.apply(stack);
     BlockRayTraceResult lookingAt = Utilities.getLookingAt(ClientSetup.getPlayer(), distance);
     Direction direction = lookingAt.getFace();
@@ -73,93 +80,38 @@ public class BlockHighlightRenderer extends Renderer
       BlockState blockState = world.getBlockState(pos);
       return filterSupplier.apply(stack, blockState);
     }).collect(Collectors.toList());
-  
+    
     if (collected.size() > 0)
     {
-      Vec3d view = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
-  
-      MatrixStack matrix = event.getMatrixStack();
-      matrix.push();
-      matrix.translate(-view.x, -view.y, -view.y);
-  
-      IRenderTypeBuffer.Impl buffer = Minecraft.getInstance().getRenderTypeBuffers().getBufferSource();
-      IVertexBuilder builder = buffer.getBuffer(RenderType.lines());
-      
-      collected.forEach(pos ->
+      MatrixStack matrixStack = event.getMatrixStack();
+      Entity renderEntity = minecraft.renderViewEntity;
+      if (renderEntity == null)
       {
-        matrix.push();;
-        matrix.translate(pos.getX(), pos.getY(), pos.getZ());
-        final float off = -0.0005f;
-        matrix.translate(off, off, off);
-        matrix.scale(1, 1, 1);
-        matrix.rotate(Vector3f.YP.rotationDegrees(-90f));
-  
-        Matrix4f posMatrix = matrix.getLast().getPositionMatrix();
-  
-        float[] cols = ColorUtil.getRGBAf(color.getRGB());
-        renderLines(posMatrix, builder, cols);
-        matrix.pop();
-      });
+        return;
+      }
       
-      matrix.pop();
-      RenderSystem.disableDepthTest();
-      buffer.finish(RenderType.lines());
+      BlockPos entityPos = renderEntity.getPosition();
+      
+      ActiveRenderInfo info = minecraft.gameRenderer.getActiveRenderInfo();
+      Vec3d view = info.getProjectedView();
+      
+      for (BlockPos pos : collected)
+      {
+        drawShape(matrixStack, minecraft.getRenderTypeBuffers().getBufferSource().getBuffer(RenderType.getLines()), VoxelShapes.fullCube(),
+          pos.getX() - view.x, pos.getY() - view.y, pos.getZ() - view.z,
+          0, 0, 0, 0.4f
+          );
+      }
     }
   }
   
-  private void renderLines(Matrix4f matrix, IVertexBuilder builder, float[] cols)
+  private static void drawShape(MatrixStack matrixStackIn, IVertexBuilder bufferIn, VoxelShape shapeIn, double xIn, double yIn, double zIn, float red, float green, float blue, float alpha)
   {
-    float a = cols[3];
-    float r = cols[0];
-    float g = cols[1];
-    float b = cols[2];
-  
-    //A
-    builder.pos(matrix, 0, 0, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 0, 0).color(r, g, b, a).endVertex();
-  
-    //B
-    builder.pos(matrix, 1, 0, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 0, -1).color(r, g, b, a).endVertex();
-  
-    //C
-    builder.pos(matrix, 0, 0, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 0, 0, -1).color(r, g, b, a).endVertex();
-  
-    //D
-    builder.pos(matrix, 0, 0, -1).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 0, -1).color(r, g, b, a).endVertex();
-  
-    //E
-    builder.pos(matrix, 0, 0, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 0, 1, 0).color(r, g, b, a).endVertex();
-  
-    //F
-    builder.pos(matrix, 1, 0, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 1, 0).color(r, g, b, a).endVertex();
-  
-    //G
-    builder.pos(matrix, 1, 0, -1).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 1, -1).color(r, g, b, a).endVertex();
-  
-    //H
-    builder.pos(matrix, 0, 0, -1).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 0, 1, -1).color(r, g, b, a).endVertex();
-  
-    //I
-    builder.pos(matrix, 0, 1, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 0, 1, -1).color(r, g, b, a).endVertex();
-  
-    //J
-    builder.pos(matrix, 0, 1, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 1, 0).color(r, g, b, a).endVertex();
-  
-    //K
-    builder.pos(matrix, 1, 1, 0).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 1, -1).color(r, g, b, a).endVertex();
-  
-    //L
-    builder.pos(matrix, 0, 1, -1).color(r, g, b, a).endVertex();
-    builder.pos(matrix, 1, 1, -1).color(r, g, b, a).endVertex();
+    Matrix4f matrix4f = matrixStackIn.getLast().getMatrix();
+    shapeIn.forEachEdge((p_230013_12_, p_230013_14_, p_230013_16_, p_230013_18_, p_230013_20_, p_230013_22_) ->
+    {
+      bufferIn.pos(matrix4f, (float) (p_230013_12_ + xIn), (float) (p_230013_14_ + yIn), (float) (p_230013_16_ + zIn)).color(red, green, blue, alpha).endVertex();
+      bufferIn.pos(matrix4f, (float) (p_230013_18_ + xIn), (float) (p_230013_20_ + yIn), (float) (p_230013_22_ + zIn)).color(red, green, blue, alpha).endVertex();
+    });
   }
 }
