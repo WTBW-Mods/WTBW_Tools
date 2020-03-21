@@ -97,6 +97,7 @@ public class BlockHighlightRenderer extends Renderer
       
       for (BlockPos pos : collected)
       {
+//        pos = pos.offset(direction.getOpposite());
         drawShape(matrixStack, minecraft.getRenderTypeBuffers().getBufferSource().getBuffer(RenderType.getLines()), VoxelShapes.fullCube(),
           pos.getX() - view.x, pos.getY() - view.y, pos.getZ() - view.z,
           0, 0, 0, 0.4f

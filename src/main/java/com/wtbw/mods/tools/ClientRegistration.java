@@ -19,7 +19,7 @@ public class ClientRegistration
     setupRenderLayers();
   
 //    MinecraftForge.EVENT_BUS.addListener(RenderManager::onDrawEnd);
-  
+//
 //    RenderManager.register(ModItems.DIAMOND_HAMMER, BlockHighlightRenderer.HARVESTABLE_BLOCKS_3x3);
   }
   
