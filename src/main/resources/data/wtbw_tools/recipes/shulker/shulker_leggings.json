@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CDC",
+    "C C"
+  ],
+  "key": {
+    "D": {
+      "item": "wtbw_tools:cobalt_leggings"
+    },
+    "C": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:shulker_leggings"
+  }
+}

@@ -13,4 +13,6 @@ public class ModItems
 {
   public static final Item DIAMOND_HAMMER = Items.AIR;
   public static final Item COBALT_BOOTS = Items.AIR;
+  public static final Item SHULKER_BOOTS = Items.AIR;
+
 }

@@ -14,19 +14,17 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 /*
-  @author: Naxanria
+  @author: Sunekaer
 */
-public class CobaltArmour extends ArmorItem
+public class ShulkerArmour extends ArmorItem
 {
-  public CobaltArmour(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder)
+  public ShulkerArmour(IArmorMaterial materialIn, EquipmentSlotType slot, Properties builder)
   {
     super(materialIn, slot, builder);
   }
@@ -47,20 +45,20 @@ public class CobaltArmour extends ArmorItem
           {
             switch (getEquipmentSlot())
             {
-//              case FEET:
-//                player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, duration, 0, true, false));
-//                break;
+              case FEET:
+                player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, duration, 1, true, false));
+                break;
           
               case LEGS:
-                player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 0, true, false));
+                player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 1, true, false));
                 break;
           
               case CHEST:
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 0, true, false));
+                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 1, true, false));
                 break;
           
               case HEAD:
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 0, true, false));
+                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 1, true, false));
                 break;
             }
           }
@@ -75,6 +73,10 @@ public class CobaltArmour extends ArmorItem
     Effect effect = null;
     switch (getEquipmentSlot())
     {
+      case FEET:
+        effect = Effects.DOLPHINS_GRACE;
+        break;
+        
       case LEGS:
         effect = Effects.SPEED;
         break;
@@ -89,35 +91,37 @@ public class CobaltArmour extends ArmorItem
     }
     if (effect != null)
     {
-      tooltip.add(effect.getDisplayName().setStyle(new Style().setColor(TextFormatting.BLUE)));
+      tooltip.add(TextComponentBuilder.createTranslated(effect.getDisplayName().getFormattedText() + " II").blue().build());
     }
-    else if (getEquipmentSlot() == EquipmentSlotType.FEET)
+    if (getEquipmentSlot() == EquipmentSlotType.FEET)
     {
-      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.cobalt_boots").blue().build());
+      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.shulker_boots").blue().build());
     }
-    tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.cobalt_setbonus").gold().build());
+
+    tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.shulker_setbonus").gold().build());
+    
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
-  
+
   public static void applyEffect(PlayerEntity player)
   {
     if (player.world.getGameTime() % 100L == 0)
     {
-      player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6 * 20, 0, true, false));
+      player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6 * 20, 1, true, false));
     }
   }
-  
+
   public static boolean hasFullSet(PlayerEntity player)
   {
     NonNullList<ItemStack> armorInventory = player.inventory.armorInventory;
-    return isCobaltArmour(armorInventory.get(EquipmentSlotType.FEET.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.CHEST.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.LEGS.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.HEAD.getIndex()));
+    return isShulkerArmour(armorInventory.get(EquipmentSlotType.FEET.getIndex())) &&
+            isShulkerArmour(armorInventory.get(EquipmentSlotType.CHEST.getIndex())) &&
+            isShulkerArmour(armorInventory.get(EquipmentSlotType.LEGS.getIndex())) &&
+            isShulkerArmour(armorInventory.get(EquipmentSlotType.HEAD.getIndex()));
   }
-  
-  public static boolean isCobaltArmour(ItemStack stack)
+
+  public static boolean isShulkerArmour(ItemStack stack)
   {
-    return  (!stack.isEmpty() && stack.getItem() instanceof CobaltArmour);
+    return  (!stack.isEmpty() && stack.getItem() instanceof ShulkerArmour);
   }
 }

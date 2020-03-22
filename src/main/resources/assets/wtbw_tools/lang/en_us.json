@@ -47,6 +47,11 @@
   "item.wtbw_tools.cobalt_sword": "Cobalt Sword",
   "item.wtbw_tools.slime_chunk_finder": "Slime Chunk Finder",
 
+  "item.wtbw_tools.shulker_helmet": "Shulker Helmet",
+  "item.wtbw_tools.shulker_chestplate": "Shulker Chestplate",
+  "item.wtbw_tools.shulker_leggings": "Shulker Leggings",
+  "item.wtbw_tools.shulker_boots": "Shulker Boots",
+
   "block.wtbw_tools.magnet_inhibitor": "Magnet Inhibitor",
 
   "wtbw_tools.tooltip.swap_target_pre": "Target block:",
@@ -60,6 +65,10 @@
   "wtbw_tools.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
   "wtbw_tools.tooltip.cobalt_boots": "Negates fall damage",
+  "wtbw_tools.tooltip.cobalt_setbonus": "Set bonus: Resistance I",
+
+  "wtbw_tools.tooltip.shulker_boots": "Negates fall damage",
+  "wtbw_tools.tooltip.shulker_setbonus": "Set bonus: Resistance II",
 
   "wtbw_tools.text.swap_target_changed": "Changed block to ",
   "wtbw_tools.text.cycled": "Changed radius to %s",

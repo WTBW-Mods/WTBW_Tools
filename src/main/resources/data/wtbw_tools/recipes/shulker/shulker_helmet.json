@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CDC"
+  ],
+  "key": {
+    "D": {
+      "item": "wtbw_tools:cobalt_helmet"
+    },
+    "C": {
+      "item": "minecraft:shulker_shell"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:shulker_helmet"
+  }
+}
