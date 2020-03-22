@@ -23,8 +23,9 @@ public class ArmourEvents
         ItemStack boots = player.inventory.armorInventory.get(EquipmentSlotType.FEET.getIndex());
         if (boots.getItem() == ModItems.COBALT_BOOTS)
         {
+          float dmg = event.getAmount();
           event.setAmount(0);
-          if (player instanceof ServerPlayerEntity)
+          if (dmg > 5.0f && player instanceof ServerPlayerEntity)
           {
             boots.attemptDamageItem(1, player.world.rand, (ServerPlayerEntity) player);
           }
