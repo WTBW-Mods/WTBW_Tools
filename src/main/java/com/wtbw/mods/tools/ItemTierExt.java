@@ -2,6 +2,7 @@ package com.wtbw.mods.tools;
 
 import com.wtbw.mods.core.item.ModItems;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.LazyValue;
 
@@ -15,7 +16,8 @@ public class ItemTierExt implements IItemTier
   // todo: repair material from tag?
   public static final ItemTierExt COPPER = new ItemTierExt(2, 218, 8, 2, 18, () -> Ingredient.fromItems(ModItems.COPPER_INGOT));
   public static final ItemTierExt COBALT = new ItemTierExt(4, 2048, 10, 4, 12, () -> Ingredient.fromItems(ModItems.COBALT_INGOT));
-  
+  public static final ItemTierExt SHULKER = new ItemTierExt(8, 3072, 14, 8, 24, () -> Ingredient.fromItems(Items.SHULKER_SHELL));
+
   private final int harvestLevel;
   private final int maxUses;
   private final float efficiency;

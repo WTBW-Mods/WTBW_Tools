@@ -36,7 +36,7 @@ public class ArmourEvents
       {
         PlayerEntity player = (PlayerEntity) event.getEntityLiving();
         ItemStack boots = player.inventory.armorInventory.get(EquipmentSlotType.FEET.getIndex());
-        if (boots.getItem() == ModItems.COBALT_BOOTS)
+        if (boots.getItem() == ModItems.COBALT_BOOTS || boots.getItem() == ModItems.SHULKER_BOOTS)
         {
           float dmg = event.getAmount();
           event.setAmount(0);
@@ -54,6 +54,7 @@ public class ArmourEvents
     if (event.side.isServer())
     {
       fullSetHandlers.forEach(handler -> handler.handle(event.player));
+
     }
   }
 }
