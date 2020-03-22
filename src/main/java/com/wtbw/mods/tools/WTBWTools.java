@@ -10,6 +10,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -44,7 +45,9 @@ public class WTBWTools
     DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> LibKeyBinds.DEFAULT.registerToolRadiusKeyBinds());
   
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-    MinecraftForge.EVENT_BUS.addListener(ArmourEvents::onFallDamageTaken);
+    IEventBus eventBus = MinecraftForge.EVENT_BUS;
+    eventBus.addListener(ArmourEvents::onFallDamageTaken);
+    eventBus.addListener(ArmourEvents::onTick);
   }
   
   public void clientSetup(final FMLClientSetupEvent event)

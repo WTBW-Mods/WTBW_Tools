@@ -7,7 +7,9 @@ import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.blocks.GreenHouseGlassBlock;
 import com.wtbw.mods.tools.blocks.ModBlocks;
 import com.wtbw.mods.tools.config.CommonConfig;
+import com.wtbw.mods.tools.event.ArmourEvents;
 import com.wtbw.mods.tools.item.armour.CobaltArmour;
+import com.wtbw.mods.tools.item.armour.FullAmourSetHandler;
 import com.wtbw.mods.tools.item.tools.*;
 import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
 import net.minecraft.block.material.Material;
@@ -48,6 +50,8 @@ public class ToolsRegistrator extends Registrator
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.CHEST, getItemProperties()), "cobalt_chestplate");
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.LEGS, getItemProperties()), "cobalt_leggings");
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "cobalt_boots");
+  
+    ArmourEvents.registerHandler(new FullAmourSetHandler(CobaltArmour::hasFullSet, CobaltArmour::applyEffect));
     
     registerTools(ItemTierExt.COBALT, "cobalt", -1.8f, 5, 3);
   
