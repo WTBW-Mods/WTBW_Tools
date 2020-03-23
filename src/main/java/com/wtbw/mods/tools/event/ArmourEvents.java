@@ -44,6 +44,7 @@ public class ArmourEvents
           {
             boots.attemptDamageItem(1, player.world.rand, (ServerPlayerEntity) player);
           }
+          event.setCanceled(true);
         }
       }
     }
