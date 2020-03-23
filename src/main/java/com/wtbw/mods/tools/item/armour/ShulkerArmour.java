@@ -2,6 +2,7 @@ package com.wtbw.mods.tools.item.armour;
 
 import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.WTBWTools;
+import com.wtbw.mods.tools.item.armour.util.ArmourFlightManager;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,15 +13,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
-  @author: Sunekaer
+  @author: Sunekaer, Naxanria
 */
 public class ShulkerArmour extends ArmorItem
 {
@@ -95,29 +97,30 @@ public class ShulkerArmour extends ArmorItem
     }
     if (getEquipmentSlot() == EquipmentSlotType.FEET)
     {
-      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.shulker_boots").blue().build());
+      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.no_fall_damage").blue().build());
     }
 
     tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.shulker_setbonus").gold().build());
     
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
-
+  
   public static void applyEffect(PlayerEntity player)
   {
     if (player.world.getGameTime() % 100L == 0)
     {
       player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, 6 * 20, 1, true, false));
     }
+    
+    ArmourFlightManager.startFlight(player);
   }
 
   public static boolean hasFullSet(PlayerEntity player)
   {
-    NonNullList<ItemStack> armorInventory = player.inventory.armorInventory;
-    return isShulkerArmour(armorInventory.get(EquipmentSlotType.FEET.getIndex())) &&
-            isShulkerArmour(armorInventory.get(EquipmentSlotType.CHEST.getIndex())) &&
-            isShulkerArmour(armorInventory.get(EquipmentSlotType.LEGS.getIndex())) &&
-            isShulkerArmour(armorInventory.get(EquipmentSlotType.HEAD.getIndex()));
+    return isShulkerArmour(player.getItemStackFromSlot(EquipmentSlotType.FEET)) &&
+      isShulkerArmour(player.getItemStackFromSlot(EquipmentSlotType.CHEST)) &&
+      isShulkerArmour(player.getItemStackFromSlot(EquipmentSlotType.LEGS)) &&
+      isShulkerArmour(player.getItemStackFromSlot(EquipmentSlotType.HEAD));
   }
 
   public static boolean isShulkerArmour(ItemStack stack)

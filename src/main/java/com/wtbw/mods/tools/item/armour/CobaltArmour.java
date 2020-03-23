@@ -93,7 +93,7 @@ public class CobaltArmour extends ArmorItem
     }
     else if (getEquipmentSlot() == EquipmentSlotType.FEET)
     {
-      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.cobalt_boots").blue().build());
+      tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.no_fall_damage").blue().build());
     }
     tooltip.add(TextComponentBuilder.createTranslated(WTBWTools.MODID + ".tooltip.cobalt_setbonus").gold().build());
     super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -109,11 +109,10 @@ public class CobaltArmour extends ArmorItem
   
   public static boolean hasFullSet(PlayerEntity player)
   {
-    NonNullList<ItemStack> armorInventory = player.inventory.armorInventory;
-    return isCobaltArmour(armorInventory.get(EquipmentSlotType.FEET.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.CHEST.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.LEGS.getIndex())) &&
-           isCobaltArmour(armorInventory.get(EquipmentSlotType.HEAD.getIndex()));
+    return isCobaltArmour(player.getItemStackFromSlot(EquipmentSlotType.FEET)) &&
+           isCobaltArmour(player.getItemStackFromSlot(EquipmentSlotType.CHEST)) &&
+           isCobaltArmour(player.getItemStackFromSlot(EquipmentSlotType.LEGS)) &&
+           isCobaltArmour(player.getItemStackFromSlot(EquipmentSlotType.HEAD));
   }
   
   public static boolean isCobaltArmour(ItemStack stack)

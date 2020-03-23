@@ -64,11 +64,10 @@
   "wtbw_tools.tooltip.harvest": "Autoharvest",
   "wtbw_tools.tooltip.greenhouse_glass": "Accelerates crop growth underneath, requires access to the sky",
 
-  "wtbw_tools.tooltip.cobalt_boots": "Negates fall damage",
+  "wtbw_tools.tooltip.no_fall_damage": "Negates fall damage",
   "wtbw_tools.tooltip.cobalt_setbonus": "Set bonus: Resistance I",
 
-  "wtbw_tools.tooltip.shulker_boots": "Negates fall damage",
-  "wtbw_tools.tooltip.shulker_setbonus": "Set bonus: Resistance II",
+  "wtbw_tools.tooltip.shulker_setbonus": "Set bonus: Resistance II, Flight",
 
   "wtbw_tools.text.swap_target_changed": "Changed block to ",
   "wtbw_tools.text.cycled": "Changed radius to %s",

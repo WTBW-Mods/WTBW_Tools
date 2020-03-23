@@ -1,7 +1,7 @@
 package com.wtbw.mods.tools.event;
 
 import com.wtbw.mods.tools.item.ModItems;
-import com.wtbw.mods.tools.item.armour.FullAmourSetHandler;
+import com.wtbw.mods.tools.item.armour.util.FullAmourSetHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -54,7 +54,6 @@ public class ArmourEvents
     if (event.side.isServer())
     {
       fullSetHandlers.forEach(handler -> handler.handle(event.player));
-
     }
   }
 }
