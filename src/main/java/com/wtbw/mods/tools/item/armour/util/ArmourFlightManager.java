@@ -19,7 +19,10 @@ public class ArmourFlightManager
   
   public static void addEnabledArmourFlight(PlayerEntity player)
   {
-    enabledFlightSet.add(player);
+    if (!isEnabledArmourFlight(player))
+    {
+      enabledFlightSet.add(player);
+    }
   }
   
   public static void removeEnabledArmourFlight(PlayerEntity player)
@@ -34,7 +37,7 @@ public class ArmourFlightManager
   
   public static void startFlight(PlayerEntity player)
   {
-    if (!player.isCreative() && !player.isSpectator() && !canFly(player))
+    if (!player.isCreative() && !player.isSpectator())
     {
       player.abilities.allowFlying = true;
       player.sendPlayerAbilities();
