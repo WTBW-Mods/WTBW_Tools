@@ -25,7 +25,7 @@ public class ArmorMaterialExt implements IArmorMaterial
   
   public static final ArmorMaterialExt COPPER = new ArmorMaterialExt("copper", ItemTierExt.COPPER, 12, new int[]{2, 5, 5, 2}, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0);
   public static final ArmorMaterialExt COBALT = new ArmorMaterialExt("cobalt", ItemTierExt.COBALT, 37, new int[]{4, 7, 9, 4}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4);
-  public static final ArmorMaterialExt SHULKER = new ArmorMaterialExt("shulker", ItemTierExt.SHULKER, 60, new int[]{4, 7, 9, 4}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8);
+  public static final ArmorMaterialExt SHULKER = new ArmorMaterialExt("shulker", ItemTierExt.SHULKER, 69, new int[]{6, 9, 11, 6}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8);
 
   // mirrored from vanilla
   private static final int[] DURABILITY = new int[]{13, 15, 16, 11};
