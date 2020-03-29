@@ -1,8 +1,6 @@
 package com.wtbw.mods.tools;
 
-import com.wtbw.mods.lib.ClientSetup;
 import com.wtbw.mods.lib.keybinds.LibKeyBinds;
-import com.wtbw.mods.tools.client.RenderManager;
 import com.wtbw.mods.tools.config.CommonConfig;
 import com.wtbw.mods.tools.event.ArmourEvents;
 import com.wtbw.mods.tools.item.ModItems;

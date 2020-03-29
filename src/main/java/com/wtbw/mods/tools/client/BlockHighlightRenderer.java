@@ -1,21 +1,14 @@
 package com.wtbw.mods.tools.client;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.wtbw.mods.lib.ClientSetup;
-import com.wtbw.mods.lib.util.ColorUtil;
+import com.wtbw.mods.lib.util.ClientHelper;
 import com.wtbw.mods.lib.util.Utilities;
-import com.wtbw.mods.tools.item.tools.ExcavatorItem;
-import com.wtbw.mods.tools.item.tools.GreatAxeItem;
-import com.wtbw.mods.tools.item.tools.HammerItem;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -25,8 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 import java.awt.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -64,16 +55,16 @@ public class BlockHighlightRenderer extends Renderer
   @Override
   public void render(RenderWorldLastEvent event, ItemStack stack)
   {
-    if (ClientSetup.getPlayer().isCrouching())
+    if (ClientHelper.getPlayer().isCrouching())
     {
       return;
     }
     
     int range = this.rangeSupplier.apply(stack);
-    BlockRayTraceResult lookingAt = Utilities.getLookingAt(ClientSetup.getPlayer(), distance);
+    BlockRayTraceResult lookingAt = Utilities.getLookingAt(ClientHelper.getPlayer(), distance);
     Direction direction = lookingAt.getFace();
     List<BlockPos> blocks = Utilities.getBlocks(lookingAt.getPos(), direction, range);
-    World world = ClientSetup.getWorld();
+    World world = ClientHelper.getWorld();
     
     List<BlockPos> collected = blocks.stream().filter(pos ->
     {
