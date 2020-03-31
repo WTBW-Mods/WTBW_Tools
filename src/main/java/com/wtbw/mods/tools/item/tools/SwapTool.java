@@ -12,6 +12,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
@@ -21,6 +22,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -173,7 +175,7 @@ public class SwapTool extends TieredItem implements ICycleTool
       BlockState swapped = world.getBlockState(pos);
       world.setBlockState(pos, target.getDefaultState(), 3);
 
-      if (!creative)
+      if (!creative && !world.isRemote)
       {
         ItemStack stackInSlot = player.inventory.getStackInSlot(index);
         stackInSlot.shrink(1);
@@ -183,8 +185,26 @@ public class SwapTool extends TieredItem implements ICycleTool
 //        {
 //          player.inventory.addItemStackToInventory(drop);
 //        }
-
-        player.inventory.addItemStackToInventory(new ItemStack(swapped.getBlock()));
+  
+  
+        List<ItemStack> drops = Block.getDrops(swapped, (ServerWorld) world, pos, null);
+        for (int i = 0; i < drops.size(); i++)
+        {
+          ItemStack drop = drops.get(i);
+          if (!player.inventory.addItemStackToInventory(drop))
+          {
+            break;
+          }
+          drops.remove(i--);
+        }
+  
+        if (drops.size() > 0)
+        {
+          for (ItemStack drop : drops)
+          {
+            InventoryHelper.spawnItemStack(world, player.getPosX(), player.getPosY(), player.getPosZ(), drop);
+          }
+        }
       }
 
       return true;
