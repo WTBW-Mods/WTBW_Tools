@@ -18,16 +18,6 @@ import java.util.List;
 */
 public class ArmourEvents
 {
-  private static List<FullAmourSetHandler> fullSetHandlers = new ArrayList<>();
-  
-  public static void registerHandler(FullAmourSetHandler handler)
-  {
-    if (!fullSetHandlers.contains(handler))
-    {
-      fullSetHandlers.add(handler);
-    }
-  }
-  
   public static void onFallDamageTaken(final LivingDamageEvent event)
   {
     if (event.getSource() == DamageSource.FALL)
@@ -50,11 +40,11 @@ public class ArmourEvents
     }
   }
   
-  public static void onTick(final TickEvent.PlayerTickEvent event)
-  {
-    if (event.side.isServer())
-    {
-      fullSetHandlers.forEach(handler -> handler.handle(event.player));
-    }
-  }
+//  public static void onTick(final TickEvent.PlayerTickEvent event)
+//  {
+//    if (event.side.isServer())
+//    {
+//      fullSetHandlers.forEach(handler -> handler.handle(event.player));
+//    }
+//  }
 }

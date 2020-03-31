@@ -54,16 +54,12 @@ public class ToolsRegistrator extends Registrator
     register(new CobaltArmour(cobaltArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "cobalt_boots");
     registerTools(ItemTierExt.COBALT, "cobalt", -1.8f, 5, 3);
   
-    ArmourEvents.registerHandler(new FullAmourSetHandler(CobaltArmour::hasFullSet, CobaltArmour::applyEffect));
-    
     ArmorMaterialExt shulkerArmorMaterial = (ArmorMaterialExt) ArmorMaterialExt.get(ItemTierExt.SHULKER);
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.HEAD, getItemProperties()), "shulker_helmet");
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.CHEST, getItemProperties()), "shulker_chestplate");
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.LEGS, getItemProperties()), "shulker_leggings");
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "shulker_boots");
 
-    ArmourEvents.registerHandler(new FullAmourSetHandler(ShulkerArmour::hasFullSet, ShulkerArmour::applyEffect, ArmourFlightManager::stopFlight));
-  
     int dMul = CommonConfig.instance().toolsDurabilityMultiplier.get();
     register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
     register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");

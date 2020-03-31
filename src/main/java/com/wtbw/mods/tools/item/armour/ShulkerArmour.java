@@ -4,7 +4,6 @@ import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.WTBWTools;
 import com.wtbw.mods.tools.item.armour.util.ArmourFlightManager;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -17,9 +16,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /*
   @author: Sunekaer, Naxanria
@@ -32,42 +29,55 @@ public class ShulkerArmour extends ArmorItem
   }
   
   @Override
-  public void inventoryTick(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected)
+  public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
   {
     // every 5 sec
-    if (world.getGameTime() % 100L == 0)
+    boolean apply = world.getGameTime() % 100L == 0;
+  
+    int duration = 6 * 20;
+  
+    switch (getEquipmentSlot())
     {
-      int duration = 6 * 20;
-      if (getEquipmentSlot().getIndex() == itemSlot)
-      {
-        if (entity instanceof PlayerEntity)
+      case FEET:
+        if (apply)
         {
-          PlayerEntity player = (PlayerEntity) entity;
-          if (player.inventory.armorInventory.get(itemSlot).equals(stack, false))
-          {
-            switch (getEquipmentSlot())
-            {
-              case FEET:
-                player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, duration, 1, true, false));
-                break;
-          
-              case LEGS:
-                player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 1, true, false));
-                break;
-          
-              case CHEST:
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 1, true, false));
-                break;
-          
-              case HEAD:
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 1, true, false));
-                break;
-            }
-          }
+          player.addPotionEffect(new EffectInstance(Effects.DOLPHINS_GRACE, duration, 1, true, false));
         }
-      }
+        break;
+    
+      case LEGS:
+        if (apply)
+        {
+          player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 1, true, false));
+        }
+        break;
+    
+      case CHEST:
+        if (apply)
+        {
+          player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 1, true, false));
+        }
+        
+        if (hasFullSet(player))
+        {
+          ArmourFlightManager.startFlight(player);
+          applyResistance(player);
+        }
+        else
+        {
+          ArmourFlightManager.stopFlight(player);
+        }
+        break;
+    
+      case HEAD:
+        if (apply)
+        {
+          player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 1, true, false));
+        }
+        break;
     }
   }
+  
   
   @Override
   public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
@@ -105,7 +115,7 @@ public class ShulkerArmour extends ArmorItem
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
   
-  public static void applyEffect(PlayerEntity player)
+  public static void applyResistance(PlayerEntity player)
   {
     if (player.world.getGameTime() % 100L == 0)
     {

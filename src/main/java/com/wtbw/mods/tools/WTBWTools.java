@@ -45,7 +45,6 @@ public class WTBWTools
     FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
     IEventBus eventBus = MinecraftForge.EVENT_BUS;
     eventBus.addListener(ArmourEvents::onFallDamageTaken);
-    eventBus.addListener(ArmourEvents::onTick);
   }
   
   public void clientSetup(final FMLClientSetupEvent event)

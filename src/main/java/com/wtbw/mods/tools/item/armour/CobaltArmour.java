@@ -3,7 +3,6 @@ package com.wtbw.mods.tools.item.armour;
 import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.WTBWTools;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
@@ -32,40 +30,40 @@ public class CobaltArmour extends ArmorItem
   }
   
   @Override
-  public void inventoryTick(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected)
+  public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
   {
     // every 5 sec
-    if (world.getGameTime() % 100L == 0)
+    boolean apply = world.getGameTime() % 100L == 0;
+  
+    int duration = 6 * 20;
+  
+    switch (getEquipmentSlot())
     {
-      int duration = 6 * 20;
-      if (getEquipmentSlot().getIndex() == itemSlot)
-      {
-        if (entity instanceof PlayerEntity)
+      case LEGS:
+        if (apply)
         {
-          PlayerEntity player = (PlayerEntity) entity;
-          if (player.inventory.armorInventory.get(itemSlot).equals(stack, false))
-          {
-            switch (getEquipmentSlot())
-            {
-//              case FEET:
-//                player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, duration, 0, true, false));
-//                break;
-          
-              case LEGS:
-                player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 0, true, false));
-                break;
-          
-              case CHEST:
-                player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 0, true, false));
-                break;
-          
-              case HEAD:
-                player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 0, true, false));
-                break;
-            }
-          }
+          player.addPotionEffect(new EffectInstance(Effects.SPEED, duration, 0, true, false));
         }
-      }
+        break;
+    
+      case CHEST:
+        if (apply)
+        {
+          player.addPotionEffect(new EffectInstance(Effects.REGENERATION, duration, 0, true, false));
+        }
+        
+        if (hasFullSet(player))
+        {
+          applyResistance(player);
+        }
+        break;
+    
+      case HEAD:
+        if (apply)
+        {
+          player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, duration, 0, true, false));
+        }
+        break;
     }
   }
   
@@ -99,7 +97,7 @@ public class CobaltArmour extends ArmorItem
     super.addInformation(stack, worldIn, tooltip, flagIn);
   }
   
-  public static void applyEffect(PlayerEntity player)
+  public static void applyResistance(PlayerEntity player)
   {
     if (player.world.getGameTime() % 100L == 0)
     {
