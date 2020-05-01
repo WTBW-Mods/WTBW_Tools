@@ -47,8 +47,7 @@ public class CommonConfig extends BaseConfig
   public ForgeConfigSpec.BooleanValue magnetCheckCanPickUp;
   public ForgeConfigSpec.IntValue magnetTickRate;
   public ForgeConfigSpec.IntValue magnetRadius;
-  
-  
+  public ForgeConfigSpec.DoubleValue magnetStrength;
   
   public CommonConfig(ForgeConfigSpec.Builder builder)
   {
@@ -160,6 +159,11 @@ public class CommonConfig extends BaseConfig
       .comment("Should the magnet only pickup items that fit into the inventory", "default: true")
       .translation(key("tools.magnet.pick_up"))
       .define("pick_up", true);
+    
+    magnetStrength = builder
+      .comment("The strength of the magnet.", "default: 0.7")
+      .translation(key("tools.magnet.strength"))
+      .defineInRange("strength", 0.7, 0.1, 5.0);
     
     pop();
   }

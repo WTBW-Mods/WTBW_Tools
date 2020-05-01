@@ -57,7 +57,9 @@ public class MagnetItem extends Item
         boolean checkCanPickup = config.magnetCheckCanPickUp.get();
 
         List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, Utilities.getBoundingBox(entity.getPosition(), radius));
-
+        
+        float force = CommonConfig.instance().magnetStrength.get().floatValue();
+        
         for (Entity e : entities)
         {
           if (e instanceof ItemEntity)
@@ -77,9 +79,8 @@ public class MagnetItem extends Item
               {
                 continue;
               }
-
-              float speed = 1.5f;
-              Vec3d moveVec = entity.getPositionVec().subtract(itemEntity.getPositionVec()).add(0, 1, 0).normalize().mul(speed, speed, speed);
+              
+              Vec3d moveVec = entity.getPositionVec().subtract(itemEntity.getPositionVec()).add(0, 1, 0).normalize().mul(force, force, force);
               if (itemEntity.collidedHorizontally)
               {
                 moveVec.add(0, 0.3, 0);
