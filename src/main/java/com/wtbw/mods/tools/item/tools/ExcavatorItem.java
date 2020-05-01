@@ -1,6 +1,7 @@
 package com.wtbw.mods.tools.item.tools;
 
 import com.wtbw.mods.lib.util.Utilities;
+import com.wtbw.mods.tools.config.CommonConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -113,6 +114,6 @@ public class ExcavatorItem extends ShovelItem
   @Override
   public float getDestroySpeed(ItemStack stack, BlockState state)
   {
-    return super.getDestroySpeed(stack, state) / 6f;
+    return super.getDestroySpeed(stack, state) / CommonConfig.instance().areaToolsSpeedModifier.get().floatValue();
   }
 }

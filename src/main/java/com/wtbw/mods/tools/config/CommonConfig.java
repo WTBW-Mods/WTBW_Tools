@@ -37,7 +37,8 @@ public class CommonConfig extends BaseConfig
   public WateringCanConfig diamondWateringCan;
   public WateringCanConfig enderWateringCan;
   
-  public ForgeConfigSpec.IntValue toolsDurabilityMultiplier;
+  public ForgeConfigSpec.DoubleValue areaToolsDurabilityMultiplier;
+  public ForgeConfigSpec.DoubleValue areaToolsSpeedModifier;
   
   public ForgeConfigSpec.ConfigValue<String> swapperBlackList;
   public ForgeConfigSpec.DoubleValue swapperMaxHardness;
@@ -96,16 +97,27 @@ public class CommonConfig extends BaseConfig
   
   private void hammers()
   {
-    push("hammer");
-    toolsDurabilityMultiplier = builder
+    push("3x3");
+    areaToolsDurabilityMultiplier = builder
       .comment
         (
-          "The multiplier for the tools durability.",
+          "The multiplier for the area tools durability.",
           "The durability is calculated by the equivalant tools durability",
-          "multiplied by this multiplier"
+          "multiplied by this multiplier",
+          "Default: 5.0"
         )
       .translation(key("tools.hammer.multiplier"))
-      .defineInRange("multiplier", 7, 1, 15);
+      .defineInRange("multiplier", 5.0, 1.0, 15.0);
+    
+    areaToolsSpeedModifier = builder
+      .comment
+        (
+          "The modifier for the speed of area tools",
+          "The speed gets divided by this number, so the higher the number, the slower the tool",
+          "Default: 4"
+        )
+      .translation(key("tools.area.speed_modifier"))
+      .defineInRange("speed_modifier", 3.5, 1.0, 10.0);
     
     pop();
   }

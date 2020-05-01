@@ -7,10 +7,7 @@ import com.wtbw.mods.lib.util.TextComponentBuilder;
 import com.wtbw.mods.tools.blocks.GreenHouseGlassBlock;
 import com.wtbw.mods.tools.blocks.ModBlocks;
 import com.wtbw.mods.tools.config.CommonConfig;
-import com.wtbw.mods.tools.event.ArmourEvents;
 import com.wtbw.mods.tools.item.armour.CobaltArmour;
-import com.wtbw.mods.tools.item.armour.util.ArmourFlightManager;
-import com.wtbw.mods.tools.item.armour.util.FullAmourSetHandler;
 import com.wtbw.mods.tools.item.armour.ShulkerArmour;
 import com.wtbw.mods.tools.item.tools.*;
 import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
@@ -60,21 +57,21 @@ public class ToolsRegistrator extends Registrator
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.LEGS, getItemProperties()), "shulker_leggings");
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "shulker_boots");
 
-    int dMul = CommonConfig.instance().toolsDurabilityMultiplier.get();
-    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(Items.STONE_PICKAXE.getMaxDamage(null) * dMul)), "stone_hammer");
-    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(Items.IRON_PICKAXE.getMaxDamage(null) * dMul)), "iron_hammer");
-    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul)), "gold_hammer");
-    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul)), "diamond_hammer");
+    double dMul = CommonConfig.instance().areaToolsDurabilityMultiplier.get();
+    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage((int) (Items.STONE_PICKAXE.getMaxDamage(null) * dMul))), "stone_hammer");
+    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage((int) (Items.IRON_PICKAXE.getMaxDamage(null) * dMul))), "iron_hammer");
+    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage((int) (Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul))), "gold_hammer");
+    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage((int) (Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul))), "diamond_hammer");
   
-    register(new GreatAxeItem(ItemTier.STONE, 6, -2.8f, getItemProperties().maxDamage(Items.STONE_AXE.getMaxDamage(null) * dMul)), "stone_greataxe");
-    register(new GreatAxeItem(ItemTier.IRON, 7, -2.8f, getItemProperties().maxDamage(Items.IRON_AXE.getMaxDamage(null) * dMul)), "iron_greataxe");
-    register(new GreatAxeItem(ItemTier.GOLD, 7, -2.8f, getItemProperties().maxDamage(Items.GOLDEN_AXE.getMaxDamage(null) * dMul)), "gold_greataxe");
-    register(new GreatAxeItem(ItemTier.DIAMOND, 8, -2.8f, getItemProperties().maxDamage(Items.DIAMOND_AXE.getMaxDamage(null) * dMul)), "diamond_greataxe");
+    register(new GreatAxeItem(ItemTier.STONE, 6, -2.8f, getItemProperties().maxDamage((int) (Items.STONE_AXE.getMaxDamage(null) * dMul))), "stone_greataxe");
+    register(new GreatAxeItem(ItemTier.IRON, 7, -2.8f, getItemProperties().maxDamage((int) (Items.IRON_AXE.getMaxDamage(null) * dMul))), "iron_greataxe");
+    register(new GreatAxeItem(ItemTier.GOLD, 7, -2.8f, getItemProperties().maxDamage((int) (Items.GOLDEN_AXE.getMaxDamage(null) * dMul))), "gold_greataxe");
+    register(new GreatAxeItem(ItemTier.DIAMOND, 8, -2.8f, getItemProperties().maxDamage((int) (Items.DIAMOND_AXE.getMaxDamage(null) * dMul))), "diamond_greataxe");
   
-    register(new ExcavatorItem(ItemTier.STONE, 4, -2.5f, getItemProperties().maxDamage(Items.STONE_SHOVEL.getMaxDamage(null) * dMul)), "stone_excavator");
-    register(new ExcavatorItem(ItemTier.IRON, 5, -2.5f, getItemProperties().maxDamage(Items.IRON_SHOVEL.getMaxDamage(null) * dMul)), "iron_excavator");
-    register(new ExcavatorItem(ItemTier.GOLD, 6, -2.5f, getItemProperties().maxDamage(Items.GOLDEN_SHOVEL.getMaxDamage(null) * dMul)), "gold_excavator");
-    register(new ExcavatorItem(ItemTier.DIAMOND, 6, -2.5f, getItemProperties().maxDamage(Items.DIAMOND_SHOVEL.getMaxDamage(null) * dMul)), "diamond_excavator");
+    register(new ExcavatorItem(ItemTier.STONE, 4, -2.5f, getItemProperties().maxDamage((int) (Items.STONE_SHOVEL.getMaxDamage(null) * dMul))), "stone_excavator");
+    register(new ExcavatorItem(ItemTier.IRON, 5, -2.5f, getItemProperties().maxDamage((int) (Items.IRON_SHOVEL.getMaxDamage(null) * dMul))), "iron_excavator");
+    register(new ExcavatorItem(ItemTier.GOLD, 6, -2.5f, getItemProperties().maxDamage((int) (Items.GOLDEN_SHOVEL.getMaxDamage(null) * dMul))), "gold_excavator");
+    register(new ExcavatorItem(ItemTier.DIAMOND, 6, -2.5f, getItemProperties().maxDamage((int) (Items.DIAMOND_SHOVEL.getMaxDamage(null) * dMul))), "diamond_excavator");
   
     register(new Trowel(getItemProperties()), "trowel");
   
