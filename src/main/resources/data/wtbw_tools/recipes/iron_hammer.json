@@ -10,7 +10,7 @@
       "tag": "forge:rods/wooden"
     },
     "B": {
-      "item": "minecraft:iron_block"
+      "tag": "forge:storage_blocks/iron"
     }
   },
   "result": {
