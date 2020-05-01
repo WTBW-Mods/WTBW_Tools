@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BS ",
+    "BS ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:gems/diamond"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/cobalt"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:cobalt_greataxe"
+  }
+}

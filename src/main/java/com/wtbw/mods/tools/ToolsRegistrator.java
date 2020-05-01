@@ -58,20 +58,34 @@ public class ToolsRegistrator extends Registrator
     register(new ShulkerArmour(shulkerArmorMaterial, EquipmentSlotType.FEET, getItemProperties()), "shulker_boots");
 
     double dMul = CommonConfig.instance().areaToolsDurabilityMultiplier.get();
-    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage((int) (Items.STONE_PICKAXE.getMaxDamage(null) * dMul))), "stone_hammer");
-    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage((int) (Items.IRON_PICKAXE.getMaxDamage(null) * dMul))), "iron_hammer");
-    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage((int) (Items.GOLDEN_PICKAXE.getMaxDamage(null) * dMul))), "gold_hammer");
-    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage((int) (Items.DIAMOND_PICKAXE.getMaxDamage(null) * dMul))), "diamond_hammer");
+    
+    int durabilityStone = (int) (ItemTier.STONE.getMaxUses() * dMul);
+    int durabilityIron = (int) (ItemTier.IRON.getMaxUses() * dMul);
+    int durabilityGold = (int) (ItemTier.GOLD.getMaxUses() * dMul);
+    int durabilityDiamond = (int) (ItemTier.DIAMOND.getMaxUses() * dMul);
+    int durabilityCopper = (int) (ItemTierExt.COPPER.getMaxUses() * dMul);
+    int durabilityCobalt = (int) (ItemTierExt.COBALT.getMaxUses() * dMul);
+    
+    register(new HammerItem(ItemTier.STONE, 6, -3.6f, getItemProperties().maxDamage(durabilityStone)), "stone_hammer");
+    register(new HammerItem(ItemTier.IRON, 8, -3.6f, getItemProperties().maxDamage(durabilityIron)), "iron_hammer");
+    register(new HammerItem(ItemTier.GOLD, 6, -3.2f, getItemProperties().maxDamage(durabilityGold)), "gold_hammer");
+    register(new HammerItem(ItemTier.DIAMOND, 11, -3.6f, getItemProperties().maxDamage(durabilityDiamond)), "diamond_hammer");
+    register(new HammerItem(ItemTierExt.COPPER, 6, -3.6f, getItemProperties().maxDamage(durabilityCopper)), "copper_hammer");
+    register(new HammerItem(ItemTierExt.COBALT, 13, -3.3f, getItemProperties().maxDamage(durabilityCobalt)), "cobalt_hammer");
+    
+    register(new GreatAxeItem(ItemTier.STONE, 6, -2.8f, getItemProperties().maxDamage(durabilityStone)), "stone_greataxe");
+    register(new GreatAxeItem(ItemTier.IRON, 7, -2.8f, getItemProperties().maxDamage(durabilityIron)), "iron_greataxe");
+    register(new GreatAxeItem(ItemTier.GOLD, 7, -2.4f, getItemProperties().maxDamage(durabilityGold)), "gold_greataxe");
+    register(new GreatAxeItem(ItemTier.DIAMOND, 9, -2.8f, getItemProperties().maxDamage(durabilityDiamond)), "diamond_greataxe");
+    register(new GreatAxeItem(ItemTierExt.COPPER, 6, -2.8f, getItemProperties().maxDamage(durabilityCopper)), "copper_greataxe");
+    register(new GreatAxeItem(ItemTierExt.COBALT, 11, -2.6f, getItemProperties().maxDamage(durabilityCobalt)), "cobalt_greataxe");
   
-    register(new GreatAxeItem(ItemTier.STONE, 6, -2.8f, getItemProperties().maxDamage((int) (Items.STONE_AXE.getMaxDamage(null) * dMul))), "stone_greataxe");
-    register(new GreatAxeItem(ItemTier.IRON, 7, -2.8f, getItemProperties().maxDamage((int) (Items.IRON_AXE.getMaxDamage(null) * dMul))), "iron_greataxe");
-    register(new GreatAxeItem(ItemTier.GOLD, 7, -2.8f, getItemProperties().maxDamage((int) (Items.GOLDEN_AXE.getMaxDamage(null) * dMul))), "gold_greataxe");
-    register(new GreatAxeItem(ItemTier.DIAMOND, 8, -2.8f, getItemProperties().maxDamage((int) (Items.DIAMOND_AXE.getMaxDamage(null) * dMul))), "diamond_greataxe");
-  
-    register(new ExcavatorItem(ItemTier.STONE, 4, -2.5f, getItemProperties().maxDamage((int) (Items.STONE_SHOVEL.getMaxDamage(null) * dMul))), "stone_excavator");
-    register(new ExcavatorItem(ItemTier.IRON, 5, -2.5f, getItemProperties().maxDamage((int) (Items.IRON_SHOVEL.getMaxDamage(null) * dMul))), "iron_excavator");
-    register(new ExcavatorItem(ItemTier.GOLD, 6, -2.5f, getItemProperties().maxDamage((int) (Items.GOLDEN_SHOVEL.getMaxDamage(null) * dMul))), "gold_excavator");
-    register(new ExcavatorItem(ItemTier.DIAMOND, 6, -2.5f, getItemProperties().maxDamage((int) (Items.DIAMOND_SHOVEL.getMaxDamage(null) * dMul))), "diamond_excavator");
+    register(new ExcavatorItem(ItemTier.STONE, 4, -2.5f, getItemProperties().maxDamage(durabilityStone)), "stone_excavator");
+    register(new ExcavatorItem(ItemTier.IRON, 5, -2.5f, getItemProperties().maxDamage(durabilityIron)), "iron_excavator");
+    register(new ExcavatorItem(ItemTier.GOLD, 6, -2.3f, getItemProperties().maxDamage(durabilityGold)), "gold_excavator");
+    register(new ExcavatorItem(ItemTier.DIAMOND, 7, -2.5f, getItemProperties().maxDamage(durabilityDiamond)), "diamond_excavator");
+    register(new ExcavatorItem(ItemTierExt.COPPER, 4, -2.5f, getItemProperties().maxDamage(durabilityCopper)), "copper_excavator");
+    register(new ExcavatorItem(ItemTierExt.COBALT, 9, -2.4f, getItemProperties().maxDamage(durabilityCobalt)), "cobalt_excavator");
   
     register(new Trowel(getItemProperties()), "trowel");
   

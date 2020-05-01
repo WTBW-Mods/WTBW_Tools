@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BS ",
+    "BS ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/copper"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:copper_greataxe"
+  }
+}

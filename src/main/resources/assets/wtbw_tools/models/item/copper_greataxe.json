@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "wtbw_tools:item/tools/greataxes/copper_greataxe"
+  }
+}
