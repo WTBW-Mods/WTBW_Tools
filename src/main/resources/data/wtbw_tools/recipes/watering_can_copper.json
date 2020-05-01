@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  C",
+    "CwC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "w": {
+      "item": "wtbw_tools:watering_can"
+    }
+  },
+  "result": {
+    "item": "wtbw_tools:watering_can_copper"
+  }
+}

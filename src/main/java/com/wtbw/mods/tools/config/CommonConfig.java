@@ -33,6 +33,7 @@ public class CommonConfig extends BaseConfig
   public ForgeConfigSpec.BooleanValue wateringCanMoisterize;
   
   public WateringCanConfig basicWateringCan;
+  public WateringCanConfig copperWateringCan;
   public WateringCanConfig quartzWateringCan;
   public WateringCanConfig diamondWateringCan;
   public WateringCanConfig enderWateringCan;
@@ -88,6 +89,7 @@ public class CommonConfig extends BaseConfig
       .define("moisterize", true);
     
     basicWateringCan = new WateringCanConfig(WateringCan.Tier.BASIC, "basic", builder);
+    copperWateringCan = new WateringCanConfig(WateringCan.Tier.COPPER, "copper", builder);
     quartzWateringCan = new WateringCanConfig(WateringCan.Tier.QUARTZ, "quartz", builder);
     diamondWateringCan = new WateringCanConfig(WateringCan.Tier.DIAMOND, "diamond", builder);
     enderWateringCan = new WateringCanConfig(WateringCan.Tier.ENDER, "ender", builder);

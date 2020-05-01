@@ -44,6 +44,7 @@ public class WateringCan extends Item
   public enum Tier
   {
     BASIC,
+    COPPER,
     QUARTZ,
     DIAMOND,
     ENDER;
@@ -84,6 +85,7 @@ public class WateringCan extends Item
   private static Map<Tier, WateringCanData> tierMap = new HashMap<Tier, WateringCanData>()
   {{
     put(Tier.BASIC, new WateringCanData(3, 1000, 5, 10));
+    put(Tier.COPPER, new WateringCanData(3, 2000, 5, 15));
     put(Tier.QUARTZ, new WateringCanData(3, 5000, 5, 25));
     put(Tier.DIAMOND, new WateringCanData(5, 10000, 5, 35));
     put(Tier.ENDER, new WateringCanData(7, 10000, 5, 50).noWater().autoHarvest());
