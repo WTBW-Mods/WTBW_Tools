@@ -5,15 +5,17 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.wtbw.mods.lib.util.ClientHelper;
 import com.wtbw.mods.lib.util.Utilities;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.math.vector.Matrix4f;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 
@@ -84,7 +86,7 @@ public class BlockHighlightRenderer extends Renderer
       BlockPos entityPos = renderEntity.getPosition();
       
       ActiveRenderInfo info = minecraft.gameRenderer.getActiveRenderInfo();
-      Vec3d view = info.getProjectedView();
+      Vector3d view = info.getProjectedView();
       
       for (BlockPos pos : collected)
       {

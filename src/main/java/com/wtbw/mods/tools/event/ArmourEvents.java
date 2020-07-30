@@ -1,17 +1,12 @@
 package com.wtbw.mods.tools.event;
 
 import com.wtbw.mods.tools.item.ModItems;
-import com.wtbw.mods.tools.item.armour.util.FullAmourSetHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /*
   @author: Naxanria

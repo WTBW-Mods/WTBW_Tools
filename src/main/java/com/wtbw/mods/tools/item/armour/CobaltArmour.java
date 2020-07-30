@@ -14,6 +14,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
@@ -87,7 +88,8 @@ public class CobaltArmour extends ArmorItem
     }
     if (effect != null)
     {
-      tooltip.add(effect.getDisplayName().setStyle(new Style().setColor(TextFormatting.BLUE)));
+      TranslationTextComponent displayName = (TranslationTextComponent) effect.getDisplayName();
+      tooltip.add(displayName.setStyle(displayName.getStyle().setFormatting(TextFormatting.BLUE)));
     }
     else if (getEquipmentSlot() == EquipmentSlotType.FEET)
     {

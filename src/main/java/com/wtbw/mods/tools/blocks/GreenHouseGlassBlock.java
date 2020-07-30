@@ -39,11 +39,6 @@ public class GreenHouseGlassBlock extends AbstractGlassBlock implements IBeaconB
 //  {
 //    return 1.0F;
 //  }
-  
-  @Override
-  public boolean causesSuffocation(BlockState p_229869_1_, IBlockReader p_229869_2_, BlockPos p_229869_3_) {
-    return false;
-  }
 
   @Override
   public DyeColor getColor()
@@ -92,7 +87,7 @@ public class GreenHouseGlassBlock extends AbstractGlassBlock implements IBeaconB
             if (block instanceof SaplingBlock)
             {
               PlayEvent.boneMeal(world, check, rand.nextInt(7) + 5);
-              ((SaplingBlock) block).func_226942_a_(world, check, foundState, rand);
+              ((SaplingBlock) block).grow(world, rand, pos, foundState);
 
               break;
             }

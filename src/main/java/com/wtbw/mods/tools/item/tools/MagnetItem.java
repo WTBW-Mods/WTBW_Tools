@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -80,7 +80,7 @@ public class MagnetItem extends Item
                 continue;
               }
               
-              Vec3d moveVec = entity.getPositionVec().subtract(itemEntity.getPositionVec()).add(0, 1, 0).normalize().mul(force, force, force);
+              Vector3d moveVec = entity.getPositionVec().subtract(itemEntity.getPositionVec()).add(0, 1, 0).normalize().mul(force, force, force);
               if (itemEntity.collidedHorizontally)
               {
                 moveVec.add(0, 0.3, 0);

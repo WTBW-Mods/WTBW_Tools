@@ -8,10 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
+
 
 /*
   @author: Naxanria
@@ -33,15 +35,17 @@ public class SlimeChunkFinderItem extends Item
     if (!world.isRemote)
     {
       //todo: check if dimension has slime chunks at all...
-      if (world.getDimension().getType() != DimensionType.OVERWORLD)
+      
+      if (world.func_234922_V_() != DimensionType.OVERWORLD)
       {
-        player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "no_slime_dimension").red().build());
+        
+        player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "no_slime_dimension").red().build(), Util.DUMMY_UUID);
       }
       else
       {
         if (Utilities.isSlimeChunk(world, player.getPosition()))
         {
-          player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "found").aqua().build());
+          player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "found").aqua().build(), Util.DUMMY_UUID);
         }
         else
         {
@@ -92,11 +96,11 @@ public class SlimeChunkFinderItem extends Item
           if (found != null)
           {
             Direction direction = Direction.getFacingFromVector(found.x - in.x, 0, found.z - in.z);
-            player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "direction", direction.getName()).aqua().build());
+            player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "direction", direction.getName2()).aqua().build(), Util.DUMMY_UUID);
           }
           else
           {
-            player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "not_found").red().build());
+            player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "not_found").red().build(), Util.DUMMY_UUID);
           }
         }
   

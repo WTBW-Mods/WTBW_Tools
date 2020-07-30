@@ -11,6 +11,8 @@ import com.wtbw.mods.tools.item.armour.CobaltArmour;
 import com.wtbw.mods.tools.item.armour.ShulkerArmour;
 import com.wtbw.mods.tools.item.tools.*;
 import com.wtbw.mods.tools.tile.MagnetInhibitorTileEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
@@ -29,7 +31,7 @@ public class ToolsRegistrator extends Registrator
   protected void registerAllBlocks()
   {
     register(new BaseTileBlock<>(getBlockProperties(Material.IRON, 4), (world, state) -> new MagnetInhibitorTileEntity()), "magnet_inhibitor", false);
-    register(new GreenHouseGlassBlock(getBlockProperties(Material.GLASS, 1).notSolid()), "greenhouse_glass");
+    register(new GreenHouseGlassBlock(getBlockProperties(Material.GLASS, 1).notSolid().setSuffocates((state, world, pos) -> false)), "greenhouse_glass");
   }
   
   @Override

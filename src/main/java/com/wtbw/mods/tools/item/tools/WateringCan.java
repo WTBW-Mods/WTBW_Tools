@@ -275,7 +275,8 @@ public class WateringCan extends Item
           int moisture = state.get(FarmlandBlock.MOISTURE);
           if (moisture < 7)
           {
-            BlockState newState = state.cycle(FarmlandBlock.MOISTURE);
+            // func_235896_a_ -> cycle
+            BlockState newState = state.func_235896_a_(FarmlandBlock.MOISTURE);
             world.setBlockState(pos, newState, 3);
           }
         }
@@ -322,7 +323,7 @@ public class WateringCan extends Item
         {
           if (!world.isRemote)
           {
-            sapling.func_226942_a_((ServerWorld) world, pos, state, rand);
+            sapling.grow((ServerWorld) world, rand, pos, state);
             bonemeal(world, pos);
           }
         }

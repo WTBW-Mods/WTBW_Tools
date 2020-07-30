@@ -103,7 +103,7 @@ public class ShulkerArmour extends ArmorItem
     }
     if (effect != null)
     {
-      tooltip.add(TextComponentBuilder.createTranslated(effect.getDisplayName().getFormattedText() + " II").blue().build());
+      tooltip.add(TextComponentBuilder.createTranslated(effect.getDisplayName().getUnformattedComponentText() + " II").blue().build());
     }
     if (getEquipmentSlot() == EquipmentSlotType.FEET)
     {

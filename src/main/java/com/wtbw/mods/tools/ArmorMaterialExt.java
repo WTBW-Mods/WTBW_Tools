@@ -23,9 +23,9 @@ public class ArmorMaterialExt implements IArmorMaterial
     return materialMap.getOrDefault(tier, ArmorMaterial.LEATHER);
   }
   
-  public static final ArmorMaterialExt COPPER = new ArmorMaterialExt("copper", ItemTierExt.COPPER, 12, new int[]{2, 5, 5, 2}, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0);
-  public static final ArmorMaterialExt COBALT = new ArmorMaterialExt("cobalt", ItemTierExt.COBALT, 37, new int[]{4, 7, 9, 4}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4);
-  public static final ArmorMaterialExt SHULKER = new ArmorMaterialExt("shulker", ItemTierExt.SHULKER, 69, new int[]{6, 9, 11, 6}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8);
+  public static final ArmorMaterialExt COPPER = new ArmorMaterialExt("copper", ItemTierExt.COPPER, 12, new int[]{2, 5, 5, 2}, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0, 0);
+  public static final ArmorMaterialExt COBALT = new ArmorMaterialExt("cobalt", ItemTierExt.COBALT, 37, new int[]{4, 7, 9, 4}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 4, 3.5f);
+  public static final ArmorMaterialExt SHULKER = new ArmorMaterialExt("shulker", ItemTierExt.SHULKER, 69, new int[]{6, 9, 11, 6}, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 8, 5f);
 
   // mirrored from vanilla
   private static final int[] DURABILITY = new int[]{13, 15, 16, 11};
@@ -42,7 +42,9 @@ public class ArmorMaterialExt implements IArmorMaterial
   
   private final int durabilityFactor;
   
-  public ArmorMaterialExt(String name, IItemTier tier, int durabilityFactor, int[] reduction, SoundEvent soundEvent, float toughness)
+  private final float knockbackResistance;
+  
+  public ArmorMaterialExt(String name, IItemTier tier, int durabilityFactor, int[] reduction, SoundEvent soundEvent, float toughness, float knockbackResistance)
   {
     this.tier = tier;
     this.durabilityFactor = durabilityFactor;
@@ -51,7 +53,8 @@ public class ArmorMaterialExt implements IArmorMaterial
     this.name = name;
     this.fullname = WTBWTools.MODID + ":" + name;
     this.toughness = toughness;
-    
+    this.knockbackResistance = knockbackResistance;
+  
     materialMap.put(tier, this);
   }
   
@@ -105,5 +108,11 @@ public class ArmorMaterialExt implements IArmorMaterial
   public float getToughness()
   {
     return toughness;
+  }
+  
+  @Override
+  public float getKnockbackResistance()
+  {
+    return knockbackResistance;
   }
 }
