@@ -106,8 +106,11 @@ public class HammerItem extends PickaxeItem
 
         Utilities.dropItems(world, Block.getDrops(blockState, (ServerWorld) world, blockPos, null, player, player.getHeldItemMainhand()), blockPos);
         Utilities.spawnExp(world, blockPos, blockState, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack), EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, stack));
-        
-        blockState.spawnAdditionalDrops(world, blockPos, player.getHeldItemMainhand());
+  
+        if (!world.isRemote)
+        {
+          blockState.spawnAdditionalDrops((ServerWorld) world, blockPos, player.getHeldItemMainhand());
+        }
         
         
       }

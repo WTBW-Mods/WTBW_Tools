@@ -36,12 +36,12 @@ public class SlimeChunkFinderItem extends Item
     {
       //todo: check if dimension has slime chunks at all...
       
-      if (world.func_234922_V_() != DimensionType.OVERWORLD)
-      {
-        
-        player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "no_slime_dimension").red().build(), Util.DUMMY_UUID);
-      }
-      else
+//      if (world.func_230315_m_() != DimensionType.OVERWORLD)
+//      {
+//
+//        player.sendMessage(TextComponentBuilder.createTranslated(BASE_KEY + "no_slime_dimension").red().build(), Util.DUMMY_UUID);
+//      }
+//      else
       {
         if (Utilities.isSlimeChunk(world, player.getPosition()))
         {
