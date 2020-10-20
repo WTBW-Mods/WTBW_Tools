@@ -31,12 +31,12 @@ Adds new tools
 [[dependencies.wtbw_tools]]
     modId="wtbw_lib"
     mandatory=true
-    versionRange="[1.0.17,)"
+    versionRange="[2.0,)"
     ordering="AFTER"
     side="BOTH"
 [[dependencies.wtbw_tools]]
     modId="wtbw_core"
     mandatory=true
-    versionRange="[1.0.16,)"
+    versionRange="[2.0,)"
     ordering="AFTER"
     side="BOTH"
