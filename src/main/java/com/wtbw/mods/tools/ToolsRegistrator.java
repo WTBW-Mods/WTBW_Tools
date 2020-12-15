@@ -126,12 +126,6 @@ public class ToolsRegistrator extends Registrator
   }
   
   @Override
-  protected void registerAllTiles()
-  {
-    register(ModBlocks.MAGNET_INHIBITOR);
-  }
-  
-  @Override
   protected void registerAllContainers()
   { }
 }
